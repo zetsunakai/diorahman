@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { useInView } from "motion/react";
 import styles from "./Cover.module.css";
 
@@ -23,6 +23,15 @@ type Props = {
 export function Cover({ pattern, image, title, priority, className }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "10% 0px" });
+
+  // Pin every loop to the document clock, so the gallery card and the detail header are always
+  // in the same phase and the morph between them never jumps. Runs before the view-transition
+  // snapshot of the new page.
+  useLayoutEffect(() => {
+    const t = document.timeline.currentTime;
+    if (!ref.current || typeof t !== "number") return;
+    for (const a of ref.current.getAnimations({ subtree: true })) a.currentTime = t;
+  }, [inView]);
 
   return (
     <div

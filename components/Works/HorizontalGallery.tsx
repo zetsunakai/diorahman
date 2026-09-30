@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import {
   m,
+  useMotionValue,
   useMotionValueEvent,
   useScroll,
-  useTransform,
 } from "motion/react";
 import type { ProjectMeta } from "@/lib/projects";
 import { takeGalleryRestore } from "@/lib/scroll";
@@ -19,16 +19,57 @@ export function HorizontalGallery({ projects }: { projects: ProjectMeta[] }) {
   const reduced = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const [distance, setDistance] = useState(0);
+  const distance = useRef(0);
+  const x = useMotionValue(0);
   const [active, setActive] = useState(1);
   const n = projects.length;
 
-  // Horizontal distance the track travels while the section is pinned.
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track || reduced) return;
-    const measure = () => setDistance(Math.max(0, track.scrollWidth - window.innerWidth));
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  /** Page progress through the pinned section, computed directly (no frame delay). */
+  const progressNow = () => {
+    const section = sectionRef.current!;
+    const top = section.getBoundingClientRect().top + window.scrollY;
+    const range = section.offsetHeight - window.innerHeight;
+    return range > 0 ? Math.min(1, Math.max(0, (window.scrollY - top) / range)) : 0;
+  };
+
+  /** Applies the track offset synchronously, so a view-transition snapshot sees it too. */
+  const place = (p: number) => {
+    const v = -p * distance.current;
+    x.set(v);
+    if (trackRef.current) trackRef.current.style.transform = `translateX(${v}px)`;
+    setActive(Math.round(p * (n - 1)) + 1);
+  };
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    x.set(-v * distance.current);
+    setActive(Math.round(v * (n - 1)) + 1);
+  });
+
+  // Measure in a layout effect: section height, track position and the restored scroll (F15)
+  // must all be in place before the browser captures the new page for the view transition.
+  useLayoutEffect(() => {
+    const restore = takeGalleryRestore();
+    if (reduced) {
+      if (restore !== null) window.scrollTo({ top: restore, behavior: "instant" });
+      return;
+    }
+    const section = sectionRef.current!;
+    const track = trackRef.current!;
+    const measure = () => {
+      distance.current = Math.max(0, track.scrollWidth - window.innerWidth);
+      section.style.height = `calc(100svh + ${distance.current}px)`;
+      place(progressNow());
+    };
     measure();
+    if (restore !== null) {
+      window.scrollTo({ top: restore, behavior: "instant" });
+      place(progressNow());
+    }
     const ro = new ResizeObserver(measure);
     ro.observe(track);
     window.addEventListener("resize", measure);
@@ -36,31 +77,15 @@ export function HorizontalGallery({ projects }: { projects: ProjectMeta[] }) {
       ro.disconnect();
       window.removeEventListener("resize", measure);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reduced]);
-
-  // Back from a detail page: return to where the gallery was (F15).
-  useEffect(() => {
-    if (!reduced && distance === 0) return;
-    const y = takeGalleryRestore();
-    if (y !== null) window.scrollTo({ top: y, behavior: "instant" });
-  }, [distance, reduced]);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
-  const x = useTransform(scrollYProgress, (v) => -v * distance);
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    setActive(Math.round(v * (n - 1)) + 1);
-  });
 
   // Keyboard focus on an off-screen card scrolls the page so the card slides into view.
   const focusCard = (i: number) => {
     const section = sectionRef.current;
     if (!section || reduced || n < 2) return;
     const top = section.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: top + (i / (n - 1)) * distance, behavior: "instant" });
+    window.scrollTo({ top: top + (i / (n - 1)) * distance.current, behavior: "instant" });
   };
 
   const heading = (
@@ -92,7 +117,7 @@ export function HorizontalGallery({ projects }: { projects: ProjectMeta[] }) {
       id="karya"
       ref={sectionRef}
       className={styles.section}
-      style={{ height: distance ? `calc(100svh + ${distance}px)` : `${n * 90}svh` }}
+      style={{ height: `${n * 90}svh` }}
       aria-label="Karya pilihan"
     >
       <div className={styles.sticky}>

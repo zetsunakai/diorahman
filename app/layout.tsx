@@ -39,7 +39,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={`${display.variable} ${text.variable}`}>
+    <html lang="id" className={`${display.variable} ${text.variable}`} data-scroll-behavior="smooth">
       <body>
         <a href="#main" className="skip-link">
           Lewati ke konten

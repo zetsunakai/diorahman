@@ -8,7 +8,6 @@
   gap: 1rem;
   padding: 0.85rem var(--gutter);
   font-family: var(--font-display);
-  view-transition-name: nav;
 }
 
 .nav::before {

@@ -91,8 +91,8 @@ html.has-cursor :is(input, textarea, select) {
 
 /* View transitions (card cover ↔ detail header, F12). */
 ::view-transition-group(.morph) {
-  animation-duration: 520ms;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-duration: 560ms;
+  animation-timing-function: cubic-bezier(0.45, 0, 0.15, 1);
 }
 ::view-transition-image-pair(.morph) {
   isolation: auto;
@@ -106,7 +106,7 @@ html.has-cursor :is(input, textarea, select) {
 }
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 260ms;
+  animation-duration: 320ms;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ViewTransition } from "react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { BackButton } from "@/components/BackButton";
 import { Cover } from "@/components/Works/Cover";
+import { MorphCover, MorphLink, MorphTargetSync } from "@/components/Works/MorphLink";
 import { getProject, getProjects } from "@/lib/projects";
 import styles from "./page.module.css";
 
@@ -42,6 +42,7 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <article className={styles.page}>
+      <MorphTargetSync slug={project.slug} />
       <div className={styles.top}>
         <BackButton />
         <span className={styles.year}>{project.year}</span>
@@ -99,15 +100,15 @@ export default async function ProjectPage({ params }: Props) {
       </div>
 
       {next.slug !== project.slug && (
-        <Link href={`/karya/${next.slug}`} className={styles.next} data-cursor="lanjut">
+        <MorphLink slug={next.slug} className={styles.next} data-cursor="lanjut">
           <span className={styles.nextLabel}>proyek berikutnya</span>
           <span className={styles.nextTitle}>
             {next.title} <span aria-hidden="true">→</span>
           </span>
-          <ViewTransition name={`cover-${next.slug}`} share="morph" default="none">
+          <MorphCover slug={next.slug}>
             <Cover pattern={next.pattern} image={next.cover} title={next.title} className={styles.nextCover} />
-          </ViewTransition>
-        </Link>
+          </MorphCover>
+        </MorphLink>
       )}
     </article>
   );
