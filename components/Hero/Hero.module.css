@@ -1,0 +1,70 @@
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: clamp(1.5rem, 4vh, 3rem);
+  padding: 7rem var(--gutter) clamp(2rem, 6vh, 4rem);
+  overflow: hidden;
+}
+
+.kicker {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(4.2rem, 17vw, 17rem);
+  font-weight: 400;
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  display: flex;
+  white-space: nowrap;
+}
+
+.glyph {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  font-variation-settings: "wght" 260, "wdth" 75, "opsz" 96;
+  will-change: transform;
+}
+
+.space {
+  display: inline-block;
+  width: 0.24em;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem 3rem;
+}
+
+.intro {
+  max-width: 38ch;
+  margin: 0;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  line-height: 1.45;
+}
+
+.hint {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.hint:hover {
+  color: var(--ink);
+}

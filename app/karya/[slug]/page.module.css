@@ -1,0 +1,153 @@
+.page {
+  padding: 5.5rem var(--gutter) 0;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-display);
+}
+
+.year {
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.cover {
+  width: min(100%, calc(72svh * 16 / 9));
+}
+
+.header {
+  margin-top: clamp(2rem, 6vh, 4rem);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 9vw, 8rem);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 78, "opsz" 96;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+  margin: 0;
+}
+
+.summary {
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-style: italic;
+  max-width: 36ch;
+  margin: 1rem 0 0;
+  line-height: 1.4;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1.5rem;
+  margin: clamp(2.5rem, 6vh, 4rem) 0;
+  padding: 1.5rem 0;
+  border-block: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  max-width: 62rem;
+}
+
+.facts dt {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--lime);
+  margin-bottom: 0.25rem;
+}
+
+.facts dd {
+  margin: 0;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+}
+
+.prose {
+  max-width: 65ch;
+}
+
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-weight: 600;
+  font-variation-settings: "wght" 600, "wdth" 88;
+  letter-spacing: -0.015em;
+  text-transform: lowercase;
+  margin: 3rem 0 0.75rem;
+}
+
+.prose p,
+.prose li {
+  line-height: 1.6;
+}
+
+.prose blockquote {
+  margin: 2rem 0;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--pink);
+  font-style: italic;
+  font-size: 1.3rem;
+}
+
+.prose code {
+  font-size: 0.9em;
+  background: var(--bg-deep);
+  padding: 0.1em 0.35em;
+  border-radius: 0.3em;
+}
+
+.next {
+  display: grid;
+  grid-template-columns: 1fr minmax(10rem, 22rem);
+  align-items: center;
+  gap: 1rem 2rem;
+  margin: clamp(5rem, 14vh, 9rem) calc(var(--gutter) * -1) 0;
+  padding: clamp(2.5rem, 8vh, 5rem) var(--gutter);
+  background: var(--bg-deep);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nextLabel {
+  grid-column: 1;
+  font-family: var(--font-display);
+  color: var(--ink-soft);
+}
+
+.nextTitle {
+  grid-column: 1;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 5rem);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 80;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+}
+
+.nextCover {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.next:hover .nextTitle {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.12em;
+}
+
+@media (max-width: 600px) {
+  .next {
+    grid-template-columns: 1fr;
+  }
+  .nextCover {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}

@@ -1,0 +1,118 @@
+:root {
+  --bg: #2231e8;
+  --bg-deep: #1824c4;
+  --ink: #f1eeff;
+  /* PRD says 62%, but that is 3.5:1 on --bg; 80% passes WCAG AA (≥ 4.5:1). */
+  --ink-soft: color-mix(in srgb, var(--ink) 80%, var(--bg));
+  --pink: #ff9ec9;
+  --lime: #e4f77a;
+  --on-pink: #111a94;
+  --focus: var(--lime);
+
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --radius: 0.9rem;
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a26c9;
+    --bg-deep: #111a94;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-text), Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--lime);
+  color: var(--on-pink);
+}
+
+a {
+  color: inherit;
+}
+
+/* Visible focus everywhere — the custom cursor never hides it. */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+html.has-cursor,
+html.has-cursor * {
+  cursor: none;
+}
+html.has-cursor :is(input, textarea, select) {
+  cursor: auto;
+}
+
+.skip-link {
+  position: fixed;
+  left: var(--gutter);
+  top: -4rem;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  background: var(--lime);
+  color: var(--on-pink);
+  font-family: var(--font-display);
+  font-weight: 600;
+  border-radius: 999px;
+}
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* View transitions (card cover ↔ detail header, F12). */
+::view-transition-group(.morph) {
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+::view-transition-image-pair(.morph) {
+  isolation: auto;
+}
+::view-transition-old(.morph),
+::view-transition-new(.morph) {
+  height: 100%;
+  object-fit: cover;
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 260ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

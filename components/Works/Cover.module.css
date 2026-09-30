@@ -1,0 +1,128 @@
+.cover {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-deep);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.cover svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cover img {
+  object-fit: cover;
+}
+
+/* Every looping element pauses unless the cover is on screen. */
+.cover [class] {
+  animation-play-state: paused;
+}
+.cover[data-playing="true"] [class] {
+  animation-play-state: running;
+}
+
+/* orbit */
+.sun {
+  fill: var(--ink);
+}
+.ring {
+  fill: none;
+  stroke: var(--ink);
+  stroke-opacity: 0.22;
+  stroke-width: 0.5;
+}
+.lime {
+  fill: var(--lime);
+}
+.pink {
+  fill: var(--pink);
+}
+.orbit {
+  transform-origin: 80px 45px;
+  animation: spin linear infinite;
+}
+.orbit:nth-of-type(2) {
+  animation-direction: reverse;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* grid */
+.dot {
+  fill: var(--ink);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(0.35);
+    fill: var(--ink);
+  }
+  50% {
+    transform: scale(1.25);
+    fill: var(--lime);
+  }
+}
+
+/* wave */
+.wave,
+.waveAccent {
+  fill: none;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  animation: drift linear infinite;
+}
+.wave {
+  stroke: var(--ink);
+  stroke-opacity: 0.55;
+}
+.waveAccent {
+  stroke: var(--pink);
+  stroke-width: 2.4;
+}
+@keyframes drift {
+  to {
+    transform: translateX(40px);
+  }
+}
+
+/* stripes */
+.stripe {
+  fill: var(--bg);
+}
+.slide {
+  animation: slide 4s linear infinite;
+}
+@keyframes slide {
+  to {
+    transform: translateX(14.65px);
+  }
+}
+.bigLime {
+  fill: var(--lime);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: breathe 5s ease-in-out infinite;
+}
+.pill {
+  fill: var(--pink);
+}
+@keyframes breathe {
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover [class] {
+    animation: none !important;
+  }
+}
