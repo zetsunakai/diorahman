@@ -1,2 +1,0 @@
-# diorahman
-project personal website
