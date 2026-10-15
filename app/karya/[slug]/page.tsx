@@ -85,7 +85,7 @@ export default async function ProjectPage({ params }: Props) {
       </dl>
       <div className="case-layout">
         <aside className="case-index">
-          <p className="mono">DALAM STUDI KASUS INI</p>
+          <p className="mono">ISI STUDI KASUS</p>
           <nav aria-label="Isi studi kasus">
             {sections.map((title, index) => (
               <Link href={`#${sectionId(title)}`} key={title}>

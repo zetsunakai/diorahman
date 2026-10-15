@@ -8,7 +8,7 @@ role: Odoo Developer
 tools: [PostgreSQL, Odoo, SQL]
 detailTools: [PostgreSQL, SQL, Odoo Inventory]
 summary: Laporan mutasi bahan baku, saldo stok, dan stock opname.
-description: Pengembangan laporan mutasi bahan baku dengan penelusuran pergerakan dan saldo stok gudang.
+description: Laporan Odoo untuk membaca mutasi bahan baku, saldo, dan selisih stock opname berdasarkan periode serta gudang.
 features:
   - Query SQL untuk merangkum transaksi masuk dan keluar.
   - Filter periode dan gudang untuk kebutuhan analisis.
@@ -20,33 +20,35 @@ order: 5
 
 ## Ringkasan
 
-Inventory Reporting mendokumentasikan laporan mutasi bahan baku, saldo stok, dan stock opname di Odoo. Fokusnya menelusuri pergerakan stok dalam periode dan gudang tertentu.
+Inventory Reporting adalah laporan mutasi bahan baku di Odoo. Laporan menampilkan transaksi masuk dan keluar, saldo stok, serta selisih stock opname untuk periode dan gudang yang dipilih.
 
 ## Kebutuhan
 
-Transaksi masuk dan keluar perlu dirangkum agar saldo serta selisih stok dapat dibaca dalam satu laporan. Periode tanpa stock opname tetap membutuhkan dasar saldo yang jelas.
+Transaksi masuk dan keluar perlu dirangkum bersama saldo dan selisih stok. Perhitungan juga perlu tetap berjalan pada periode tanpa stock opname, dengan memakai saldo terakhir sebagai titik awal.
 
 ## Peran dan kontribusi
 
-Peran yang tercantum adalah **Odoo Developer**, dengan cakupan query PostgreSQL dan penyusunan informasi laporan inventory.
+Saya mengerjakan query PostgreSQL dan penyusunan informasi laporan, termasuk perhitungan saldo saat tidak ada stock opname pada periode yang dipilih.
 
-- Merangkum transaksi masuk dan keluar dengan SQL.
-- Menyediakan filter periode dan gudang.
-- Menggunakan saldo terakhir untuk periode tanpa stock opname.
-- Menyertakan selisih stok dan keterangan stock opname.
+- Merangkum transaksi masuk dan keluar melalui query SQL.
+- Menambahkan filter periode dan gudang.
+- Mengambil saldo terakhir untuk periode tanpa stock opname.
+- Menampilkan selisih stok dan keterangan stock opname.
 
 ## Implementasi
 
-Query SQL merangkum transaksi bahan baku berdasarkan periode dan gudang. Untuk periode tanpa stock opname, saldo terakhir digunakan sebagai dasar perhitungan.
+Query SQL merangkum transaksi bahan baku sesuai periode dan gudang. Jika tidak ada stock opname pada periode tersebut, laporan mengambil saldo terakhir sebagai dasar perhitungan.
 
-Informasi selisih dan keterangan stock opname ditampilkan untuk membantu penelusuran perubahan saldo.
+Selisih stok dan keterangan stock opname ditampilkan bersama ringkasan mutasi agar perubahan saldo dapat ditelusuri.
 
 ## Tantangan teknis
 
-**Menghitung saldo tanpa stock opname pada periode berjalan.** Laporan perlu mengambil saldo terakhir agar transaksi tetap memiliki titik awal perhitungan.
+**Periode tanpa stock opname.** Saya menyesuaikan query agar laporan tetap mengambil saldo terakhir untuk menghitung mutasi pada periode berjalan.
 
-**Menjaga konteks pergerakan.** Transaksi dan saldo perlu dibatasi oleh periode serta gudang yang sama agar informasi laporan dapat ditelusuri.
+**Filter laporan.** Transaksi dan saldo harus menggunakan batas periode serta gudang yang sama agar angka pada laporan dapat ditelusuri ke pergerakannya.
 
 ## Hasil
 
-Materi proyek menjelaskan ringkasan mutasi, perhitungan saldo, dan pelaporan selisih stok. Source publik, demo, dan pengukuran dampak belum tersedia dalam dokumentasi ini.
+Laporan menyajikan ringkasan mutasi, perhitungan saldo, serta selisih dan keterangan stock opname. Periode tanpa stock opname menggunakan saldo terakhir sebagai dasar perhitungan.
+
+Studi kasus menggunakan ilustrasi. Demo, source publik, dan data pengukuran dampak belum tersedia.

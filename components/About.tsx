@@ -8,7 +8,7 @@ const skills = [
     title: "Frontend",
     tools: "React · Next.js · TypeScript · Tailwind CSS",
     description:
-      "Antarmuka publik, galeri, dan formulir booking pada MUA Ranni.",
+      "Saya membangun galeri, halaman layanan, dan formulir booking MUA Ranni.",
     project: "MUA Ranni",
     slug: "mua-ranni",
   },
@@ -16,7 +16,7 @@ const skills = [
     title: "Backend & Database",
     tools: "Python · Django · PostgreSQL · Drizzle ORM · Supabase",
     description:
-      "Data stok dan akses pengguna di IT Inventory; autentikasi admin di MUA Ranni.",
+      "Saya mengerjakan query stok dan akses gudang di IT Inventory, serta autentikasi admin MUA Ranni.",
     project: "IT Inventory",
     slug: "it-inventory",
   },
@@ -24,15 +24,15 @@ const skills = [
     title: "Business Applications",
     tools: "Odoo · HMX · Custom Module · Workflow",
     description:
-      "Menghubungkan sales order, penjadwalan tim, dan work order dalam alur Odoo.",
-    project: "Booking & Work Order",
-    slug: "booking-work-order",
+      "Saya menyesuaikan integrasi CEISA, laporan inventory, dan alur approval pada modul Odoo.",
+    project: "Penyesuaian Integrasi CEISA",
+    slug: "integrasi-ceisa",
   },
   {
     title: "Tools",
     tools: "Docker · Git · Vite · Linux",
     description:
-      "Docker Compose untuk database lokal IT Inventory, dengan pengujian Vitest dan Playwright di repo.",
+      "Saya memakai Docker Compose untuk PostgreSQL lokal di IT Inventory, serta Vitest dan Playwright untuk pengujian.",
     project: "IT Inventory",
     slug: "it-inventory",
   },
@@ -43,13 +43,12 @@ export function About() {
     <section className="section about" id="about" aria-labelledby="about-title">
       <div className="about-heading">
         <h2 id="about-title">
-          Memahami proses,
+          Tentang
           <br />
-          baru menulis kode.
+          saya
         </h2>
         <p className="about-aside">
-          Antarmuka yang jelas perlu ditopang alur dan data yang bisa
-          diandalkan.
+          React/Next.js, Python, Odoo, dan HMX.
         </p>
         <figure className="about-portrait">
           <div className="portrait-frame">
@@ -70,21 +69,19 @@ export function About() {
       <div>
         <div className="about-copy">
           <p>
-            Saya <strong>{site.name}</strong>. Hal yang saya suka dari
-            pengembangan web adalah mengurai kebutuhan menjadi bagian yang bisa
-            dikerjakan: apa yang dilihat pengguna, apa yang diproses aplikasi,
-            dan bagaimana datanya disimpan.
+            Saya <strong>{site.name}</strong>. Pekerjaan saya mencakup website
+            layanan, aplikasi inventory, dan pengembangan ERP.
           </p>
           <p>
-            Di MUA Ranni, fokusnya mempertemukan portofolio, jadwal, dan
-            pemesanan. Di IT Inventory, saya berhadapan dengan transaksi gudang
-            dan hak akses. Kontribusi pada Odoo dan HMX mengasah pemahaman saya
-            terhadap produksi, inventory, dan proses bisnis di balik layar.
+            MUA Ranni dan IT Inventory adalah dua proyek web yang saya
+            kerjakan. MUA Ranni menampilkan layanan makeup dan menerima detail
+            booking lewat WhatsApp. IT Inventory menangani pencatatan stok dan
+            transaksi gudang.
           </p>
           <p>
-            Saya membawa pendekatan itu ke pekerjaan full-stack: membangun
-            antarmuka dengan React/Next.js sambil menjaga hubungan antara
-            interaksi, logika aplikasi, dan database.
+            Di HashMicro, saya berkontribusi pada modul Odoo dan HMX.
+            Pekerjaannya meliputi laporan inventory, integrasi CEISA,
+            perencanaan produksi, dan alur persetujuan.
           </p>
         </div>
         <div className="skills">

@@ -5,10 +5,10 @@ export function Contact() {
   return (
     <section className="contact" id="contact" aria-labelledby="contact-heading">
       <div>
-        <h2 id="contact-heading">Ada kebutuhan yang ingin diwujudkan?</h2>
+        <h2 id="contact-heading">Mari bekerja sama.</h2>
         <p>
-          Punya ide aplikasi web atau ingin membahas peluang kerja? Mari mulai
-          dari kebutuhan dan alur kerja yang ingin Anda bangun.
+          Saya terbuka untuk membahas proyek web, pengembangan ERP, atau
+          peluang kerja. Silakan hubungi saya melalui salah satu profil berikut.
         </p>
       </div>
       <div className="contact-actions">

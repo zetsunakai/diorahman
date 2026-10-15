@@ -9,7 +9,7 @@ tools: [Next.js, Tailwind CSS, Supabase]
 detailTools:
   [React, Next.js, TypeScript, Tailwind CSS, Supabase, PostgreSQL, Drizzle ORM]
 summary: Website makeup artist dengan portofolio, jadwal, booking WhatsApp, dan panel admin.
-description: Website layanan makeup yang menghubungkan portofolio, informasi harga, ketersediaan jadwal, dan pemesanan melalui WhatsApp, dilengkapi pengelolaan konten dari panel admin.
+description: MUA Ranni menampilkan portofolio, layanan, harga, dan ketersediaan jadwal. Formulir booking menyusun pesan WhatsApp, sementara konten dikelola melalui panel admin.
 features:
   - Galeri portofolio dengan filter kategori dan tampilan foto.
   - Kalender ketersediaan serta formulir booking melalui WhatsApp.
@@ -22,39 +22,39 @@ link: https://mua-rannilstry.web.id
 
 ## Ringkasan
 
-MUA Ranni adalah website layanan makeup dengan portofolio, informasi layanan dan harga, kalender ketersediaan, serta formulir pemesanan melalui WhatsApp. Panel admin menyediakan pengelolaan konten di balik halaman publik.
+MUA Ranni adalah website layanan makeup dengan galeri portofolio, informasi harga, kalender ketersediaan, dan formulir booking WhatsApp. Pemilik layanan dapat memperbarui kontennya melalui panel admin.
 
 ## Kebutuhan
 
-Calon pelanggan perlu melihat hasil riasan, membandingkan layanan, memeriksa jadwal, lalu menyampaikan detail acara. Pemilik layanan membutuhkan cara memperbarui profil, harga, foto, dan jadwal tanpa mengubah kode.
+Calon pelanggan perlu melihat hasil riasan, membaca pilihan layanan, memeriksa jadwal, lalu menyampaikan detail acara. Pemilik layanan juga perlu memperbarui profil, harga, foto, dan jadwal tanpa mengubah kode.
 
 ## Peran dan kontribusi
 
-Peran yang tercantum adalah **Full-Stack Developer**, dengan cakupan halaman publik dan pengelolaan konten.
+Saya mengerjakan halaman publik dan panel admin, termasuk galeri, layanan, kalender ketersediaan, dan formulir booking.
 
-- Membangun galeri portofolio, halaman layanan, dan kalender ketersediaan dengan React dan Next.js.
-- Menyusun formulir booking yang meneruskan detail acara ke WhatsApp.
+- Membangun galeri, halaman layanan, dan kalender dengan React dan Next.js.
+- Menyusun formulir yang meneruskan detail acara ke WhatsApp.
 - Mengembangkan panel admin untuk profil, layanan, harga, portofolio, jadwal, dan testimoni.
-- Menghubungkan autentikasi dan penyimpanan Supabase dengan data PostgreSQL melalui Drizzle ORM.
+- Menyiapkan autentikasi dan penyimpanan dengan Supabase, serta akses data PostgreSQL melalui Drizzle ORM.
 
 ## Implementasi
 
-Antarmuka menggunakan TypeScript dan Tailwind CSS. Galeri mendukung filter kategori serta tampilan foto. Formulir booking mengumpulkan jenis layanan, tanggal, lokasi, dan informasi acara untuk menyusun pesan WhatsApp; formulir ini bukan sistem konfirmasi booking otomatis.
+Halaman menggunakan TypeScript dan Tailwind CSS. Pengunjung dapat memfilter galeri berdasarkan kategori dan membuka foto. Pada formulir booking, jenis layanan, tanggal, lokasi, dan detail acara dirangkai menjadi pesan WhatsApp. Konfirmasi booking tetap dilakukan melalui percakapan.
 
-Di panel admin, Supabase memverifikasi identitas pengguna. Akses dibatasi pada email admin yang diizinkan, dan halaman serta Server Action memeriksa akses sebelum membaca atau mengubah data.
+Supabase memverifikasi identitas admin. Hanya email yang diizinkan yang dapat mengakses panel, dan pemeriksaan izin dilakukan pada halaman serta Server Action sebelum data dibaca atau diubah.
 
-Kalender ketersediaan memisahkan informasi yang ditampilkan ke publik dari catatan internal admin. Konten layanan, harga, dan portofolio tersimpan di database.
+Kalender menampilkan ketersediaan jadwal kepada pengunjung, sementara catatan internal hanya dapat dibaca admin. Data layanan, harga, dan portofolio tersimpan di database.
 
 ## Tantangan teknis
 
-**Membawa konteks ke proses booking.** Pilihan layanan dan detail acara perlu tetap terbawa ketika pengunjung berpindah dari halaman layanan ke formulir, lalu melanjutkan percakapan melalui WhatsApp.
+**Detail booking.** Pilihan layanan dan informasi acara perlu tetap terbawa saat pengunjung membuka formulir dan melanjutkan ke WhatsApp. Saya menyusun pesan dari data formulir agar detail tersebut ikut terkirim.
 
-**Memvalidasi informasi acara.** Formulir memeriksa tanggal yang sudah lewat dan format tautan Google Maps sebelum menyusun pesan pemesanan.
+**Validasi acara.** Formulir memeriksa tanggal yang sudah lewat dan format tautan Google Maps sebelum menyusun pesan booking.
 
-**Memisahkan akses publik dan admin.** Informasi profil dan jadwal harus dapat dibaca pengunjung, sementara perubahan konten dan catatan internal hanya tersedia bagi admin yang terverifikasi.
+**Akses publik dan admin.** Pengunjung dapat membaca informasi layanan dan jadwal. Perubahan konten dan catatan internal dibatasi untuk admin yang terverifikasi.
 
 ## Hasil
 
-Website menyediakan alur dari eksplorasi portofolio dan layanan menuju pemesanan lewat WhatsApp. Pengelolaan konten tersedia melalui panel admin, termasuk harga, foto, dan ketersediaan jadwal.
+Website dapat digunakan untuk melihat layanan, memeriksa ketersediaan, dan mengirim detail booking melalui WhatsApp. Harga, foto, dan jadwal dapat diperbarui dari panel admin.
 
-Demo publik tersedia melalui tautan di atas. Pengunjung dapat menelusuri layanan dan membawa detail acara ke percakapan WhatsApp, sementara pembaruan konten ditangani dari panel admin.
+Demo publik tersedia melalui tombol Lihat Demo.

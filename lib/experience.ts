@@ -5,24 +5,24 @@ export const experiences = [
     id: "odoo",
     platform: "Odoo / Equip3",
     period: "Kontribusi kode · 2025–2026",
-    title: "Inventory, kepabeanan, dan proses produksi.",
+    title: "IT Inventory dan integrasi CEISA.",
     summary:
-      "Mengembangkan dan memperbaiki modul aplikasi bisnis berbasis Python/Odoo, dengan fokus terbesar pada IT Inventory dan integrasi CEISA.",
+      "Saya mengembangkan dan memperbaiki modul Python/Odoo, terutama IT Inventory dan integrasi CEISA.",
     contributions: [
       {
         area: "IT Inventory & reporting",
         description:
-          "Laporan mutasi bahan baku, WIP, dan barang jadi; perhitungan saldo serta penanganan stock opname.",
+          "Saya memperbaiki laporan mutasi bahan baku, WIP, dan barang jadi, termasuk perhitungan saldo dan penanganan stock opname.",
       },
       {
         area: "Integrasi CEISA",
         description:
-          "Pemetaan payload dokumen kepabeanan, data bahan baku, serta tarif dan pungutan per barang.",
+          "Saya menyesuaikan payload dokumen kepabeanan, relasi bahan baku, serta tarif dan pungutan per barang.",
       },
       {
         area: "Manufacturing & approval",
         description:
-          "Production plan, reservasi material, proses cutting dan assembly, serta approval matrix dan dashboard persetujuan.",
+          "Kontribusi saya mencakup production plan, validasi reservasi material, proses cutting dan assembly, serta approval matrix dan dashboard persetujuan.",
       },
     ],
     tools: ["Python", "Odoo", "JavaScript", "XML"],
@@ -31,29 +31,29 @@ export const experiences = [
     id: "hmx",
     platform: "HMX",
     period: "Kontribusi kode · 2026",
-    title: "Manufacturing dari backend sampai antarmuka.",
+    title: "Fitur produksi, inventory, dan costing di HMX.",
     summary:
-      "Mengembangkan fitur HMX dengan Python/Django dan antarmuka JavaScript/Vue, terutama pada manufacturing, perencanaan material, dan inventory.",
+      "Saya mengerjakan fitur HMX dengan Python/Django dan JavaScript/Vue. Kontribusi saya terutama pada manufacturing, perencanaan material, dan inventory.",
     contributions: [
       {
-        area: "Planning & produksi",
+        area: "Perencanaan produksi",
         description:
-          "MPS/MRP, hierarki BoM, penjadwalan, pembatasan gudang sumber material, dan alur quality control.",
+          "Saya menyesuaikan MPS/MRP, hierarki BoM, penjadwalan, dan batas gudang sumber material. Saya juga memperbaiki alur quality control.",
       },
       {
         area: "Inventory & kepabeanan",
         description:
-          "Lifecycle dan hak akses dokumen, pengiriman data ke middleware CEISA, serta visualisasi relasi dokumen masuk–keluar.",
+          "Saya menyesuaikan status dan hak akses dokumen, pengiriman data ke middleware CEISA, serta tampilan relasi dokumen masuk dan keluar.",
       },
       {
         area: "Costing & antarmuka",
         description:
-          "Detail biaya subcontracting, laporan biaya produksi, serta widget dan tampilan interaktif untuk alur operasional.",
+          "Saya menambahkan detail biaya subcontracting dan menyesuaikan laporan biaya produksi beserta antarmukanya.",
       },
       {
         area: "Pengujian",
         description:
-          "Unit dan regression test untuk fitur bisnis, serta skenario E2E/BDD pada alur subcontracting dan detail biaya.",
+          "Saya menambah dan memperbaiki unit test, regression test, serta skenario E2E/BDD untuk alur subcontracting dan detail biaya.",
       },
     ],
     tools: ["Python", "Django", "JavaScript", "Vue", "SQL", "BDD"],

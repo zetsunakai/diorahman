@@ -14,9 +14,9 @@ export function TechStack() {
   return (
     <div className="stackstrip" aria-label="Teknologi yang digunakan">
       <span className="mono">
-        TOOLS OF
+        TEKNOLOGI
         <br />
-        THE TRADE
+        YANG DIGUNAKAN
       </span>
       <div className="stackitems">
         {technologies.map((technology) => (

@@ -65,7 +65,7 @@ export function Dialog({ open, onClose, labelledBy, children }: Props) {
       <button
         type="button"
         className="close"
-        aria-label="Tutup"
+        aria-label="Tutup ringkasan proyek"
         onClick={onClose}
       >
         ×

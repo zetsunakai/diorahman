@@ -17,8 +17,8 @@ detailTools:
     Better Auth,
     Docker,
   ]
-summary: Aplikasi pengelolaan stok dan transaksi gudang dengan hak akses pengguna.
-description: Aplikasi inventory untuk operasional gudang dan perusahaan kawasan berikat, dengan antarmuka React, logika server Next.js, dan database PostgreSQL.
+summary: Aplikasi pencatatan stok dan transaksi gudang dengan akses berdasarkan peran pengguna.
+description: IT Inventory mencatat stok dan transaksi gudang untuk kebutuhan perusahaan kawasan berikat. Aplikasi ini memakai React/Next.js dan PostgreSQL, dengan akses berdasarkan peran dan gudang.
 features:
   - Manajemen produk, gudang, lokasi, lot, dan nomor seri.
   - Penerimaan, pengiriman, transfer, retur, dan stock opname.
@@ -30,41 +30,41 @@ order: 1
 
 ## Ringkasan
 
-IT Inventory adalah aplikasi web untuk pencatatan stok dan transaksi gudang dalam konteks perusahaan kawasan berikat. Proyek ini mempertemukan antarmuka operasional, logika transaksi, database, dan hak akses pengguna.
+IT Inventory adalah aplikasi web untuk mencatat stok dan transaksi gudang pada perusahaan kawasan berikat. Pengguna dapat melihat pergerakan barang dan saldo stok sesuai akses gudangnya.
 
 ## Kebutuhan
 
-Pergerakan barang perlu dicatat berdasarkan produk, lokasi, gudang, dan lot atau nomor seri. Pengguna juga perlu melihat saldo stok tanpa mendapat akses ke gudang yang bukan kewenangannya.
+Setiap pergerakan barang perlu dicatat berdasarkan produk, gudang, lokasi, dan lot atau nomor seri. Data dari gudang lain harus tetap dibatasi sesuai hak akses pengguna.
 
-Cakupannya meliputi penerimaan, pengiriman, perpindahan, retur, penyesuaian, stock opname, dan tutup periode.
+Transaksi yang ditangani meliputi penerimaan, pengiriman, perpindahan, retur, penyesuaian stok, stock opname, dan tutup periode.
 
 ## Peran dan kontribusi
 
-Peran yang tercantum untuk proyek ini adalah **Full-Stack Developer**. Cakupan pengembangannya mencakup antarmuka React/Next.js, formulir transaksi, query database, serta validasi dan pemeriksaan akses di server.
+Di proyek ini, saya mengerjakan halaman React/Next.js, formulir transaksi, query database, serta validasi dan pemeriksaan akses di server.
 
 - Menyusun halaman master data dan transaksi dengan TypeScript, Tailwind CSS, dan shadcn/ui.
-- Menghubungkan data aplikasi ke PostgreSQL melalui Drizzle ORM.
-- Menerapkan autentikasi serta pembatasan akses sesuai peran dan gudang.
-- Menyiapkan database lokal dengan Docker Compose.
+- Mengerjakan akses data PostgreSQL melalui Drizzle ORM.
+- Menerapkan autentikasi dan pembatasan akses berdasarkan peran serta gudang.
+- Menyiapkan PostgreSQL lokal dengan Docker Compose.
 
 ## Implementasi
 
-Next.js App Router menghubungkan halaman, formulir, dan logika server. Better Auth menangani autentikasi. Pengecekan izin dilakukan di server, sehingga menu yang disembunyikan bukan satu-satunya pembatas akses.
+Halaman dan formulir menggunakan Next.js App Router. Better Auth menangani autentikasi, sementara halaman dan transaksi memeriksa izin pengguna di server.
 
-Saldo stok saat ini dibaca dari data saldo, sedangkan saldo pada tanggal tertentu dihitung dari ledger. Query juga mempertimbangkan gudang yang dapat diakses pengguna. Data produk, lokasi, lot, dan satuan dihubungkan untuk menyajikan stok dalam konteks yang jelas.
+Saldo stok saat ini dibaca dari data saldo. Untuk tanggal tertentu, aplikasi menghitungnya dari ledger. Query menyertakan batas akses gudang dan menampilkan rincian produk, lokasi, lot, serta satuan.
 
-Repo memuat pengujian unit dan database dengan Vitest, serta alur browser dengan Playwright. Docker Compose menyediakan PostgreSQL untuk pengembangan lokal.
+Pengujian unit dan database menggunakan Vitest. Alur browser diuji dengan Playwright, dan PostgreSQL lokal dijalankan melalui Docker Compose.
 
 ## Tantangan teknis
 
-**Menjaga konsistensi stok.** Transaksi perlu memperhitungkan jenis pergerakan, lokasi, dan status dokumen. Validasi transaksi dan pencatatan pergerakan diletakkan di lapisan server dan database.
+**Perhitungan stok.** Jenis pergerakan, lokasi, dan status dokumen memengaruhi perubahan stok. Saya menempatkan validasi transaksi dan pencatatan pergerakan di server dan database.
 
-**Membatasi akses secara konsisten.** Tampilan daftar dan query stok perlu mengikuti akses gudang pengguna, termasuk saat pencarian, filter, dan pagination digunakan.
+**Hak akses gudang.** Pembatasan akses harus tetap berlaku saat pengguna mencari data, mengubah filter, atau berpindah halaman daftar. Pemeriksaan akses diterapkan pada query stok dan daftar transaksi.
 
-**Membaca saldo lintas waktu.** Saldo saat ini dan saldo pada tanggal tertentu menggunakan sumber perhitungan yang berbeda, tetapi tetap perlu menyajikan struktur data yang sama bagi antarmuka.
+**Saldo pada tanggal tertentu.** Saldo saat ini dan saldo historis dihitung dari sumber yang berbeda. Hasil keduanya perlu memakai struktur data yang sama agar dapat ditampilkan pada halaman stok.
 
 ## Hasil
 
-Cakupan aplikasi yang tersedia di source meliputi master data, transaksi inventory, stok, lot dan nomor seri, stock opname, serta pengaturan akses. Halaman dan alur tersebut terhubung dengan database PostgreSQL.
+Aplikasi menyediakan master data, transaksi inventory, pelacakan lot dan nomor seri, stock opname, serta pengaturan akses yang tersimpan di PostgreSQL.
 
-Proyek ini memperlihatkan penerapan full-stack pada aplikasi operasional: keputusan di antarmuka perlu selaras dengan aturan transaksi dan struktur data. Data stok dapat ditelusuri menurut gudang dan tanggal dengan akses mengikuti pengguna.
+Pengguna dapat menelusuri saldo menurut gudang dan tanggal. Data yang ditampilkan mengikuti hak akses pengguna, termasuk saat pencarian dan filter digunakan.

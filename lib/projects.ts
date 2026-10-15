@@ -12,7 +12,7 @@ export type ProjectMeta = {
   detailTools: string[];
   summary: string;
   kind:
-    "booking" | "manufacturing" | "inventory" | "inventory-app" | "makeup-site";
+    "ceisa" | "manufacturing" | "inventory" | "inventory-app" | "makeup-site";
   description: string;
   features: string[];
   featured: boolean;

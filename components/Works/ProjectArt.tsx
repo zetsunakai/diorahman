@@ -62,11 +62,11 @@ const artwork = {
           <div>
             <div className="mocklabel">WISUDA · PESTA · PERNIKAHAN</div>
             <div className="makeup-heading">
-              Hari istimewamu,
+              Layanan makeup
               <br />
-              <em>tampilan</em>
+              <em>untuk</em>
               <br />
-              terbaikmu.
+              acara Anda.
             </div>
             <span className="makeup-cta">Chat WhatsApp ↗</span>
           </div>
@@ -85,42 +85,42 @@ const artwork = {
       </div>
     </div>
   ),
-  booking: (
+  ceisa: (
     <div className="project-art art-one" aria-hidden="true">
       <div className="mock">
         <div className="mockbar">
-          <b>odoo / Sales</b>
-          <span>Booking · Work Orders</span>
+          <b>odoo / CEISA</b>
+          <span>Dokumen kepabeanan</span>
         </div>
         <div className="mockbody">
-          <div className="mocklabel">OPERATIONS / WORK ORDERS</div>
+          <div className="mocklabel">CEISA / DATA DOKUMEN</div>
           <div className="mockheading">
-            Team workspace <span className="tinybtn">+ New order</span>
+            Pemetaan data <span className="tinybtn">Detail</span>
           </div>
           <div className="kanban">
             <div className="col">
-              Pending · 02
+              Bahan baku · 02
               <div className="ticket">
-                WO-00001<i></i>
-                <em>Team Alpha</em>
+                BAHAN A<i></i>
+                <em>Bahan impor</em>
               </div>
               <div className="ticket">
-                WO-00003<i></i>
-                <em>Team Beta</em>
-              </div>
-            </div>
-            <div className="col">
-              In progress · 01
-              <div className="ticket">
-                WO-00002<i></i>
-                <em>Team Gamma</em>
+                BAHAN B<i></i>
+                <em>Bahan lokal</em>
               </div>
             </div>
             <div className="col">
-              Done · 01
+              Tarif · 01
               <div className="ticket">
-                WO-00004<i></i>
-                <em>Completed ✓</em>
+                PER BAHAN<i></i>
+                <em>Data tarif</em>
+              </div>
+            </div>
+            <div className="col">
+              Pungutan · 01
+              <div className="ticket">
+                PER BAHAN<i></i>
+                <em>Data pungutan</em>
               </div>
             </div>
           </div>

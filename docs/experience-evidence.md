@@ -41,3 +41,19 @@ Area paling menonjol: manufacturing; berikutnya IT Inventory dan integrasi modul
 | `93b9773afa02`       | Perubahan laporan biaya serta test                           | Akses dan tampilan laporan biaya produksi                   |
 
 Referensi ini dapat diperiksa dengan `git show <commit>` di repo sumber terkait. Tidak menautkan repo perusahaan dari website karena akses publiknya tidak diasumsikan.
+
+## Verifikasi studi kasus pengganti Booking & Work Order
+
+Penelusuran ulang pada 16 Oktober 2026 mencakup subjek commit, path yang berubah, serta pencarian perubahan logika booking dan service team dengan author yang sama. Pada riwayat yang tersedia, belum ditemukan dukungan untuk klaim pengembangan alur booking service team dari Sales sampai pembuatan work order. Riwayat HMX tetap shallow sehingga kesimpulan ini terbatas pada commit yang dapat diperiksa.
+
+Commit `1a7ca0fd6b3` (6 Agustus 2025) memang membahas Work Order, tetapi diff-nya hanya membuat field actual duration pada work order manufacturing menjadi readonly. Commit `8bc1e4fb746` mengubah konfigurasi work order produksi. Keduanya tidak membuktikan alur booking layanan yang sebelumnya ditampilkan.
+
+Isi studi kasus tersebut diganti menjadi **Penyesuaian Integrasi CEISA**. Cakupannya mengikuti beberapa jenis dokumen, berdasarkan diff commit dengan email author yang sama:
+
+- `3fb673e37ae` (22 Juli 2026): pemilihan nomor identitas sesuai jenis identitas pada BC16, BC27, BC28, BC33, BC331, BC40, dan BC41; penambahan kode gudang pada BC27/BC41 serta tanggal stuffing dan nilai barang pada BC331.
+- `09728883512` (7 Oktober 2026): perubahan nilai subsubpos BC11 pada BC16 dari angka menjadi teks untuk mempertahankan nol di awal.
+- `6e0f43f6bfb` (15 Oktober 2026): pengambilan bahan baku per baris barang, penggabungan bahan baku impor dan lokal, penyesuaian field pungutan lokal/impor, serta penerusan nomor urut bahan baku ke data tarif.
+
+Konten menjelaskan kontribusi penyesuaian pemetaan dan pembentukan payload lintas dokumen; tidak mengklaim membangun seluruh integrasi, keberhasilan pengiriman ke CEISA, atau hasil produksi.
+
+Sesuai arahan pengguna, file studi kasus diganti menjadi `integrasi-ceisa.mdx`, slug menjadi `integrasi-ceisa`, dan key ilustrasi menjadi `ceisa`. File `booking-work-order.mdx` dihapus; URL lamanya dialihkan ke halaman CEISA agar tautan yang sudah dibagikan tetap dapat dibuka. Judul, teks studi kasus, daftar teknologi, tautan keahlian, dan isi teks ilustrasinya mengikuti kasus CEISA. Tidak ada source perusahaan atau identitas pelanggan yang disalin ke portfolio.

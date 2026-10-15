@@ -8,11 +8,10 @@ export function Hero() {
         <div className="eyebrow mono">{site.name}</div>
         <p className="hero-role">{site.role}</p>
         <h1 id="hero-title">
-          Aplikasi web.
+          Saya membangun
           <br />
-          <span>Alur kerja yang jelas.</span>
+          <span>aplikasi web.</span>
         </h1>
-        <p>{site.intro}</p>
         <div className="actions">
           <a className="primary" href="#projects">
             Lihat Proyek <span aria-hidden="true">↗</span>
@@ -26,7 +25,6 @@ export function Hero() {
             Kenali saya <span aria-hidden="true">↓</span>
           </a>
         </div>
-        <p className="hero-note">React / Next.js · Python · Pengalaman Odoo</p>
       </div>
       <ArchitectureHero />
     </section>

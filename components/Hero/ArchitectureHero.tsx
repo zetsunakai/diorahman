@@ -169,7 +169,7 @@ export function ArchitectureHero() {
         <p className="mono" id="architecture-title">
           ALUR APLIKASI
         </p>
-        <span>Interaksi → proses → data</span>
+        <span>Frontend → backend → database</span>
       </div>
       <div
         className="architecture-stage"
@@ -201,7 +201,7 @@ export function ArchitectureHero() {
       </div>
       <div
         className="architecture-layers"
-        aria-label="Eksplorasi lapisan aplikasi"
+        aria-label="Tautan proyek dan pengalaman"
       >
         {architectureLayers.map((layer, index) => (
           <Link
@@ -227,7 +227,7 @@ export function ArchitectureHero() {
       </div>
       <figcaption className="architecture-caption">
         <p>{selected.description}</p>
-        <span>Pilih lapisan untuk melihat penerapannya.</span>
+        <span>Pilih bagian untuk melihat contoh pekerjaan saya.</span>
       </figcaption>
     </figure>
   );

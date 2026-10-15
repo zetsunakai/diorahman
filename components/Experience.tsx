@@ -8,7 +8,7 @@ export function Experience() {
       aria-labelledby="experience-title"
     >
       <div className="section-top">
-        <h2 id="experience-title">Membangun di balik operasional bisnis.</h2>
+        <h2 id="experience-title">Pengalaman pengembangan ERP.</h2>
       </div>
       <div className="experience-list">
         <span className="experience-track" aria-hidden="true">

@@ -1,0 +1,60 @@
+---
+title: Penyesuaian Integrasi CEISA
+slug: integrasi-ceisa
+category: Modul Odoo
+kind: ceisa
+year: 2026
+role: Odoo Developer
+tools: [Odoo 14, Python, CEISA]
+detailTools: [Odoo 14, Python, CEISA]
+summary: Penyesuaian payload, identitas entitas, serta data barang dan pungutan pada berbagai dokumen CEISA di Odoo.
+description: Saya menyesuaikan integrasi CEISA di Odoo, mulai dari pemetaan identitas dan format field hingga relasi barang, bahan baku, dan tarif.
+features:
+  - Penyesuaian payload untuk beberapa jenis dokumen kepabeanan.
+  - Pemetaan nomor identitas sesuai jenis identitas entitas.
+  - Perbaikan format field dan kelengkapan data dokumen.
+  - Penyesuaian relasi barang, bahan baku, tarif, dan pungutan.
+featured: true
+order: 3
+---
+
+## Ringkasan
+
+Saya mengerjakan penyesuaian integrasi CEISA pada modul Odoo untuk beberapa jenis dokumen kepabeanan. Pekerjaan saya mencakup pemetaan identitas entitas, format field, serta relasi barang, bahan baku, tarif, dan pungutan.
+
+## Kebutuhan
+
+Setiap jenis dokumen memiliki susunan data yang berbeda. Payload perlu mengambil nomor identitas dari field yang sesuai, menyertakan data dokumen yang dibutuhkan, dan memakai format nilai yang tepat.
+
+Untuk dokumen yang menyertakan bahan baku, data impor dan lokal juga perlu mengikuti barang masing-masing. Tarif dan pungutannya harus tetap merujuk ke bahan baku yang sama.
+
+## Peran dan kontribusi
+
+Saya menyesuaikan logika Python yang menyusun payload pada beberapa model dokumen CEISA di Odoo.
+
+- Memperbaiki pemilihan nomor identitas berdasarkan jenis identitas entitas.
+- Melengkapi pemetaan data seperti kode gudang, tanggal stuffing, dan nilai barang sesuai jenis dokumen.
+- Menyesuaikan format field, termasuk nilai teks yang perlu mempertahankan angka nol di awal.
+- Memperbaiki pengambilan bahan baku per barang serta sumber nilai tarif dan pungutannya.
+
+## Implementasi
+
+Pada beberapa model dokumen, saya mengubah pemilihan nomor identitas agar mengikuti jenis identitas entitas. Saya juga melengkapi field payload sesuai model dokumennya, seperti kode gudang pada BC27 dan BC41 serta tanggal stuffing dan nilai barang pada BC331.
+
+Penyesuaian format dilakukan terpisah dari pemetaan field. Salah satu contohnya adalah nilai subsubpos BC11 pada dokumen BC16 yang dikirim sebagai teks agar angka nol di awal tetap tersimpan.
+
+Untuk bahan baku, saya membatasi pengambilan data per baris barang, menggabungkan bahan impor dan lokal, lalu menyesuaikan sumber nilai pungutannya. Nomor urut bahan baku diteruskan ke data tarif agar relasinya tetap sesuai.
+
+## Tantangan teknis
+
+**Perbedaan antar dokumen.** Field yang dibutuhkan tidak selalu sama. Saya menyesuaikan pemetaan pada model dokumen terkait tanpa menyamakan seluruh struktur payload.
+
+**Pemilihan sumber data.** Nomor identitas dan nilai pungutan bisa tersimpan pada field yang berbeda. Saya menyesuaikan pembacaannya berdasarkan jenis identitas dan asal bahan baku.
+
+**Relasi barang dan bahan baku.** Daftar bahan baku perlu mengikuti barang yang sedang diproses. Data tarif kemudian memakai nomor urut bahan baku tersebut sebagai rujukan.
+
+## Hasil
+
+Perubahan ini memperbaiki sumber nomor identitas, melengkapi field pada beberapa jenis dokumen, dan mempertahankan format nilai teks yang dibutuhkan. Untuk data bahan baku, payload memisahkan daftar per barang dan mengaitkan tarif dengan bahan baku yang sesuai.
+
+Studi kasus menggunakan ilustrasi. Demo, source publik, dan data pengukuran dampak belum tersedia.

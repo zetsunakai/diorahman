@@ -227,11 +227,6 @@ a {
 .hero h1 span {
   color: var(--accent);
 }
-.hero > div > p:not(.eyebrow):not(.hero-role):not(.hero-note) {
-  max-width: 48ch;
-  color: var(--muted);
-  line-height: 1.85;
-}
 .actions,
 .project-actions,
 .dialog-actions,
@@ -1360,9 +1355,6 @@ dialog li + li {
   }
   .hero .hero-role {
     font-size: 22px;
-  }
-  .hero > div > p:not(.eyebrow):not(.hero-role):not(.hero-note) {
-    font-size: 15px;
   }
   .hero .hero-note {
     font-size: 11px;

@@ -2,7 +2,7 @@ export const site = {
   name: "Dio Rahman Alfateh",
   role: "Full-Stack Developer",
   intro:
-    "Saya Dio. Saya mengembangkan aplikasi web dengan React/Next.js dan Python, dari antarmuka hingga database. Pengalaman Odoo membantu saya memahami alur bisnis di baliknya.",
+    "Saya Dio Rahman Alfateh, Full-Stack Developer. Saya mengerjakan aplikasi web dengan React/Next.js dan Python, serta pengembangan ERP di Odoo dan HMX.",
   url: "https://diorahman.vercel.app",
   // Hanya isi kanal pribadi yang sudah dikonfirmasi untuk dipublikasikan.
   email: "",
