@@ -35,6 +35,10 @@ Kontak berasal dari `lib/site.ts`. GitHub aktif; `email` dan `linkedin` kosong k
 
 `public/cv.pdf` telah diperiksa: isinya masih placeholder. Karena itu `site.cv` bernilai `null` dan tombol **Download CV** tidak ditampilkan. Ganti PDF dengan CV asli, periksa isi dan data publiknya, lalu isi `cv: "/cv.pdf"` untuk mengaktifkan tombol.
 
+### Foto profil
+
+`public/images/dio-rahman.png` adalah foto transparan yang diberikan pemilik portfolio. Foto ditampilkan dari kepala hingga dada dalam bingkai 4:5 pada bagian Tentang, memakai `next/image` dengan ukuran responsif dan placeholder blur. Crop diatur melalui CSS tanpa mengubah PNG asli atau transparansinya. Foto mengikuti reveal bagian Tentang yang sudah menghormati reduced motion.
+
 ### Screenshot, demo, dan source
 
 Belum ada screenshot asli dalam repo. Ilustrasi diberi caption yang jelas pada setiap proyek. Untuk memakai screenshot yang sudah disiapkan, simpan aset PNG, JPEG, WebP, atau AVIF di `public/projects/`, lalu tambahkan frontmatter:

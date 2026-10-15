@@ -782,6 +782,36 @@ h2 {
   font-size: 15px;
   max-width: 30ch;
 }
+.about-portrait {
+  max-width: 340px;
+  margin-top: 28px;
+}
+.portrait-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid #405036;
+  border-radius: 12px;
+  background: var(--panel);
+}
+.portrait-frame img {
+  object-fit: cover;
+  object-position: center top;
+  transform: scale(2);
+  transform-origin: center top;
+}
+.about-portrait figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.about-portrait figcaption span + span {
+  color: var(--muted);
+  font-size: 12px;
+}
 .about-copy {
   color: var(--muted);
   line-height: 1.9;
@@ -1254,6 +1284,10 @@ dialog li + li {
   }
   .about-heading {
     max-width: none;
+  }
+  .about-portrait {
+    max-width: 300px;
+    margin-top: 24px;
   }
   .about-aside {
     max-width: 45ch;

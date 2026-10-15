@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
+import portrait from "@/public/images/dio-rahman.png";
 
 const skills = [
   {
@@ -50,6 +52,21 @@ export function About() {
           Antarmuka yang jelas perlu ditopang alur dan data yang bisa
           diandalkan.
         </p>
+        <figure className="about-portrait">
+          <div className="portrait-frame">
+            <Image
+              src={portrait}
+              alt={`Potret ${site.name} dari kepala hingga dada`}
+              fill
+              sizes="(max-width: 720px) 600px, (max-width: 1000px) 64vw, 680px"
+              placeholder="blur"
+            />
+          </div>
+          <figcaption>
+            <span>{site.name}</span>
+            <span>{site.role}</span>
+          </figcaption>
+        </figure>
       </div>
       <div>
         <div className="about-copy">
