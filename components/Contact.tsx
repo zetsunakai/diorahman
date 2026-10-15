@@ -5,7 +5,6 @@ export function Contact() {
   return (
     <section className="contact" id="contact" aria-labelledby="contact-heading">
       <div>
-        <p className="eyebrow mono">04 / MARI TERHUBUNG</p>
         <h2 id="contact-heading">Ada kebutuhan yang ingin diwujudkan?</h2>
         <p>
           Punya ide aplikasi web atau ingin membahas peluang kerja? Mari mulai

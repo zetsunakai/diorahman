@@ -333,9 +333,6 @@ h2 {
   line-height: 1.15;
   letter-spacing: 0.015em;
 }
-.about h2 {
-  margin-top: 14px;
-}
 .projects {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -934,7 +931,7 @@ h2 {
 }
 .contact h2 {
   max-width: 24ch;
-  margin: 14px 0 18px;
+  margin: 0 0 18px;
 }
 .contact > div > p:not(.eyebrow) {
   max-width: 54ch;

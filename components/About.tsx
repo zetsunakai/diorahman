@@ -42,7 +42,6 @@ export function About() {
   return (
     <section className="section about" id="about" aria-labelledby="about-title">
       <div className="about-heading">
-        <p className="eyebrow mono">03 / TENTANG SAYA</p>
         <h2 id="about-title">
           Memahami proses,
           <br />
