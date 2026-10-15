@@ -1,0 +1,48 @@
+---
+title: IT Inventory
+slug: it-inventory
+kind: inventory-app
+year: 2026
+role: Full-Stack Developer
+tools: [Next.js, TypeScript, PostgreSQL]
+detailTools:
+  [
+    React,
+    Next.js,
+    Tailwind CSS,
+    shadcn/ui,
+    PostgreSQL,
+    Drizzle ORM,
+    Better Auth,
+    Docker,
+  ]
+summary: Aplikasi pengelolaan stok dan transaksi gudang dengan hak akses pengguna.
+description: Aplikasi inventory untuk operasional gudang dan perusahaan kawasan berikat, dengan antarmuka React, logika server Next.js, dan database PostgreSQL.
+features:
+  - Manajemen produk, gudang, lokasi, lot, dan nomor seri.
+  - Penerimaan, pengiriman, transfer, retur, dan stock opname.
+  - Autentikasi dan pembatasan akses berdasarkan peran pengguna.
+  - PostgreSQL melalui Drizzle ORM dan Docker Compose untuk database lokal.
+featured: true
+order: 1
+---
+
+## Kebutuhan
+
+Operasional gudang membutuhkan pencatatan stok dan transaksi yang terstruktur, dengan akses yang sesuai peran pengguna. IT Inventory dikembangkan untuk kebutuhan ini dalam konteks perusahaan kawasan berikat.
+
+## Implementasi
+
+Antarmuka dibangun dengan React, Next.js, TypeScript, Tailwind CSS, dan shadcn/ui. Logika server mengelola master data, transaksi inventory, validasi input, dan pemeriksaan hak akses.
+
+PostgreSQL menyimpan data melalui Drizzle ORM. Better Auth menangani autentikasi, sedangkan Docker Compose menyediakan database untuk pengembangan lokal. Repo juga memuat pengujian unit, database, dan alur browser dengan Vitest serta Playwright.
+
+## Cakupan
+
+- Produk, kategori, satuan, partner, gudang, dan lokasi.
+- Stok, lot, nomor seri, dan kartu stok.
+- Penerimaan, pengiriman, perpindahan barang, dan retur.
+- Stock opname, penyesuaian, dan tutup periode.
+- Pengaturan pengguna dan akses berdasarkan peran.
+
+_Visual antarmuka merupakan ilustrasi, bukan tangkapan layar aplikasi produksi._

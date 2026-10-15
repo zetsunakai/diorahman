@@ -1,56 +1,49 @@
-# Dio Rahman Alfateh — portofolio eksperimental
+# Dio Rahman Alfateh — Full-Stack Developer Portfolio
 
-Situs portofolio pribadi yang dibangun dengan Next.js (App Router) dan Motion, berdasarkan PRD "Portofolio Eksperimental".
+Portofolio Next.js App Router dan TypeScript dengan desain gelap, aksen lime, serta tipografi DM Sans dan Space Grotesk. Desain mengikuti referensi [Dio — Programmer Portfolio](https://dio-programmer-portfolio.duskyamber.chatgpt.site).
 
 ## Menjalankan
 
 ```bash
 npm install
-npm run dev     # http://localhost:3000
-npm run build   # build produksi (webpack, bundle lebih kecil dari Turbopack)
+npm run dev
+# http://localhost:3000
+
+npm run build
 npm start
 ```
 
-## Mengubah konten
+## Konten
 
-| Apa | Di mana |
-| --- | --- |
-| Nama, intro, email, link sosial, URL situs | `lib/site.ts` |
-| Proyek (satu file per proyek) | `content/projects/*.mdx` |
-| CV | `public/cv.pdf` |
-| Manifesto dan daftar tools | `components/Manifesto.tsx`, `components/About.tsx` |
-| Warna dan token | `app/globals.css`, `lib/motion.ts` |
+| Konten                                      | Lokasi                            |
+| ------------------------------------------- | --------------------------------- |
+| Nama, peran, intro, email publik, URL situs | `lib/site.ts`                     |
+| Proyek, catatan detail, teknologi           | `content/projects/*.mdx`          |
+| Profil dan daftar keahlian                  | `components/About.tsx`            |
+| Hero dan ilustrasi terminal                 | `components/Hero/Hero.tsx`        |
+| Ilustrasi antarmuka proyek                  | `components/Works/ProjectArt.tsx` |
+| Warna, tipografi, layout responsif          | `app/globals.css`                 |
 
-Menambah proyek tidak perlu menyentuh kode animasi. Buat file MDX baru dengan frontmatter:
+Kartu proyek membuka dialog detail. Halaman `/karya/[slug]` juga tersedia untuk setiap proyek dan disertakan dalam sitemap.
 
-```yaml
-title: Pasar Senin
-slug: pasar-senin
-year: 2026
-role: Creative developer
-tools: [Next.js, Motion]
-summary: Identitas dan situs untuk pasar kuliner malam.
-pattern: orbit          # orbit | grid | wave | stripes — sampul animasi bawaan
-cover: /projects/x.jpg  # opsional; kalau diisi, gambar menggantikan pola
-featured: true          # tampil di galeri beranda (maks. 6)
-order: 1
-link: https://contoh.com
-repo: https://github.com/...
-```
+Isi `site.email` di `lib/site.ts` agar tombol kontak menampilkan alamat publik. Jika kosong, dialog kontak mengikuti demo referensi: pengunjung dapat mencoba menyimpan email di browser sendiri menggunakan localStorage. Email demo tidak tersimpan di server atau terlihat oleh pengunjung lain.
+
+Karya pilihan menampilkan IT Inventory dan MUA Ranni berdasarkan kode proyek di folder PRJ, serta Booking & Work Order dari pengalaman Odoo. React, Next.js, TypeScript, Tailwind CSS, Python, PostgreSQL, Docker, Vite, dan Odoo ditampilkan sebagai toolkit.
+
+Ilustrasi proyek dibuat dengan HTML dan CSS, bukan tangkapan layar aplikasi produksi. Catatan proyek Odoo berasal dari referensi awal; sesuaikan dengan pengalaman dan data proyek yang ingin dipublikasikan.
 
 ## Struktur
 
+```text
+app/                  Layout, beranda, halaman proyek, SEO
+components/           Navigasi, hero, proyek, dialog, profil, kontak, footer
+content/projects/     Konten proyek MDX
+lib/                  Konfigurasi situs dan pembaca konten
 ```
-app/
-  layout.tsx            font, bar atas, kursor, LazyMotion
-  page.tsx              beranda
-  karya/[slug]/page.tsx detail proyek
-components/
-  Hero/                 SplitName, ReactiveLetter
-  Works/                HorizontalGallery, WorkCard, Cover
-  Manifesto.tsx  About.tsx  Contact.tsx  MagneticButton.tsx  Cursor.tsx  Nav.tsx
-lib/
-  motion.ts             token spring & variants
-  projects.ts           baca dan urutkan MDX
-content/projects/       *.mdx
+
+## Verifikasi
+
+```bash
+npx tsc --noEmit
+npm run build
 ```

@@ -1,0 +1,37 @@
+---
+title: Manufacturing Approval
+slug: manufacturing-approval
+kind: manufacturing
+year: 2026
+role: Odoo Developer
+tools: [Odoo MRP, Python, Workflow]
+detailTools: [Odoo MRP, Python, Approval Matrix]
+summary: Alur persetujuan manufacturing order dari production plan.
+description: Penyesuaian alur produksi agar manufacturing order melalui persetujuan manual sesuai approval matrix.
+features:
+  - Manufacturing order dibuat dari production plan.
+  - Order tetap dalam status Draft ketika approval matrix aktif.
+  - Baris approval disiapkan sebelum persetujuan manual.
+  - Konfirmasi dilakukan melalui alur persetujuan di manufacturing order.
+featured: false
+order: 4
+---
+
+## Kebutuhan
+
+Manufacturing order dari production plan perlu mengikuti persetujuan manual sesuai approval matrix sebelum dikonfirmasi.
+
+## Implementasi
+
+Ketika approval matrix aktif, manufacturing order yang baru dibuat tetap berada dalam status Draft. Baris approval disiapkan agar proses persetujuan bisa dilakukan dari manufacturing order.
+
+Konfirmasi produksi mengikuti alur persetujuan tersebut sehingga setiap langkah dapat ditelusuri.
+
+## Cakupan
+
+- Pembuatan manufacturing order dari production plan.
+- Penanganan status Draft saat approval matrix aktif.
+- Persiapan baris approval.
+- Konfirmasi melalui persetujuan manual.
+
+_Visual antarmuka merupakan ilustrasi, bukan tangkapan layar aplikasi produksi._

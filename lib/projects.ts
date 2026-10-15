@@ -8,10 +8,12 @@ export type ProjectMeta = {
   year: number;
   role: string;
   tools: string[];
+  detailTools: string[];
   summary: string;
-  /** Optional image in /public; without it a generated, animated pattern is used. */
-  cover?: string;
-  pattern: "orbit" | "grid" | "wave" | "stripes";
+  kind:
+    "booking" | "manufacturing" | "inventory" | "inventory-app" | "makeup-site";
+  description: string;
+  features: string[];
   featured: boolean;
   order: number;
   link?: string;
@@ -38,7 +40,6 @@ export function getProjects(): Project[] {
   return readAll();
 }
 
-/** 3–6 featured projects for the home gallery (F8). */
 export function getFeatured(): ProjectMeta[] {
   return readAll()
     .filter((p) => p.featured)

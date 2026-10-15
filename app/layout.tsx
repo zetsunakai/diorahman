@@ -1,29 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Newsreader } from "next/font/google";
-import { Cursor } from "@/components/Cursor";
+import { DM_Sans, Space_Grotesk } from "next/font/google";
 import { Nav } from "@/components/Nav";
-import { Providers } from "@/components/Providers";
+import { Footer } from "@/components/Footer";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const display = Bricolage_Grotesque({
+const display = Space_Grotesk({
   subsets: ["latin"],
-  axes: ["opsz", "wdth"],
   variable: "--font-display",
   display: "swap",
 });
 
-const text = Newsreader({
+const text = DM_Sans({
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  weight: ["300", "400", "500"],
-  variable: "--font-text",
+  variable: "--font-body",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: `${site.name} — ${site.role}`, template: `%s — ${site.name}` },
+  title: {
+    default: `${site.name} — ${site.role}`,
+    template: `%s — ${site.name}`,
+  },
   description: site.intro,
   openGraph: {
     type: "website",
@@ -34,21 +33,29 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#2231e8",
+  themeColor: "#111310",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="id" className={`${display.variable} ${text.variable}`} data-scroll-behavior="smooth">
+    <html
+      lang="id"
+      className={`${display.variable} ${text.variable}`}
+      data-scroll-behavior="smooth"
+    >
       <body>
         <a href="#main" className="skip-link">
           Lewati ke konten
         </a>
-        <Providers>
-          <Nav />
-          <main id="main">{children}</main>
-          <Cursor />
-        </Providers>
+        <Nav />
+        <main id="main" className="wrap">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

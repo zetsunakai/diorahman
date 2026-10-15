@@ -1,34 +1,61 @@
-import Link from "next/link";
-import { site } from "@/lib/site";
-import styles from "./Nav.module.css";
+"use client";
 
-/** F1: always-visible top bar, with the CV one click away on every page. */
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
+const links = [
+  { id: "home", label: "Beranda" },
+  { id: "projects", label: "Proyek" },
+  { id: "about", label: "Tentang" },
+];
+
 export function Nav() {
+  const pathname = usePathname();
+  const [active, setActive] = useState("home");
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        }
+      },
+      { rootMargin: "-15% 0px -55% 0px" },
+    );
+    for (const { id } of links) {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    }
+    return () => observer.disconnect();
+  }, [pathname]);
+
   return (
-    <header className={styles.nav}>
-      <Link href="/" className={styles.logo}>
-        <span className={styles.full}>{site.name.toLowerCase()}</span>
-        <span className={styles.short} aria-hidden="true">
-          dio.
-        </span>
-      </Link>
-      <nav aria-label="Utama">
-        <ul className={styles.links}>
-          <li>
-            <Link href="/#karya">Karya</Link>
-          </li>
-          <li>
-            <Link href="/#tentang">Tentang</Link>
-          </li>
-          <li>
-            <Link href="/#kontak">Kontak</Link>
-          </li>
-          <li>
-            <a href={site.cv} download className={styles.cv}>
-              Unduh CV
-            </a>
-          </li>
-        </ul>
+    <header className="site-header">
+      <nav className="wrap" aria-label="Navigasi utama">
+        <Link className="logo" href="/#home" aria-label="Dio beranda">
+          dio<span>.</span>
+        </Link>
+        <div className="navlinks">
+          {links.map(({ id, label }) => {
+            const current =
+              pathname === "/" ? active === id : id === "projects";
+            return (
+              <Link
+                key={id}
+                href={`/#${id}`}
+                className={current ? "active" : undefined}
+                aria-current={current ? "location" : undefined}
+              >
+                {label}
+              </Link>
+            );
+          })}
+        </div>
+        <Link href="/#contact" className="navcontact">
+          Mari terhubung <span aria-hidden="true">↗</span>
+        </Link>
       </nav>
     </header>
   );

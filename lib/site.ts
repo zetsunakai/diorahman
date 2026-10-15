@@ -1,16 +1,9 @@
 export const site = {
   name: "Dio Rahman Alfateh",
-  /** Hero lines, lowercase (PRD: judul huruf kecil). */
-  display: ["dio rahman", "alfateh"],
-  role: "creative developer",
+  role: "Full-Stack Developer",
   intro:
-    "Creative developer yang membangun antarmuka web yang bergerak, bereaksi, dan terasa hidup — dari identitas brand sampai aplikasi produk.",
-  email: "halo@contoh.com",
-  cv: "/cv.pdf",
+    "Full-Stack Developer yang membangun website dan aplikasi web dari antarmuka hingga database. Menggunakan React, Next.js, dan Python untuk membuat solusi yang rapi, fungsional, dan mudah digunakan.",
+  // Isi untuk mengaktifkan kontak publik. Jika kosong, dialog demo mengikuti referensi.
+  email: "",
   url: "https://diorahman.vercel.app",
-  socials: [
-    { label: "GitHub", href: "https://github.com/" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/" },
-    { label: "Instagram", href: "https://www.instagram.com/" },
-  ],
 };

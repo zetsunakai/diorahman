@@ -1,0 +1,37 @@
+---
+title: Booking & Work Order
+slug: booking-work-order
+kind: booking
+year: 2026
+role: Odoo Developer
+tools: [Odoo 14, Python, XML]
+detailTools: [Odoo 14, Python, XML, QWeb]
+summary: Penjadwalan service team dan pengelolaan work order dari sales order.
+description: Modul booking di Sales yang menghubungkan jadwal pelanggan, service team, dan pelaksanaan pekerjaan.
+features:
+  - Pengisian otomatis leader dan anggota berdasarkan service team.
+  - Validasi waktu booking dan pemeriksaan jadwal tim yang bertabrakan.
+  - Pembuatan work order dari konfirmasi sales order.
+  - Alur Pending, In Progress, Done, dan Cancel dengan pencatatan waktu.
+featured: true
+order: 3
+---
+
+## Kebutuhan
+
+Jadwal pelanggan, ketersediaan service team, dan pelaksanaan pekerjaan perlu terhubung dalam satu alur di Sales.
+
+## Implementasi
+
+Pemilihan service team mengisi leader dan anggota secara otomatis. Validasi waktu booking memeriksa jadwal tim yang bertabrakan sebelum sales order dikonfirmasi.
+
+Konfirmasi sales order membuat work order yang dapat dilanjutkan melalui status Pending, In Progress, Done, atau Cancel dengan pencatatan waktu pelaksanaan.
+
+## Cakupan
+
+- Pengisian otomatis leader dan anggota tim.
+- Validasi waktu dan benturan jadwal.
+- Pembuatan work order dari sales order.
+- Pelacakan status dan waktu pekerjaan.
+
+_Visual antarmuka merupakan ilustrasi, bukan tangkapan layar aplikasi produksi._

@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ViewTransition } from "react";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { BackButton } from "@/components/BackButton";
-import { Cover } from "@/components/Works/Cover";
-import { MorphCover, MorphLink, MorphTargetSync } from "@/components/Works/MorphLink";
+import { ProjectArt } from "@/components/Works/ProjectArt";
 import { getProject, getProjects } from "@/lib/projects";
-import styles from "./page.module.css";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return getProjects().map((p) => ({ slug: p.slug }));
+  return getProjects().map((project) => ({ slug: project.slug }));
 }
 
 export const dynamicParams = false;
@@ -29,7 +26,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: project.title,
       description: project.summary,
       url: `/karya/${project.slug}`,
-      ...(project.cover ? { images: [project.cover] } : {}),
     },
   };
 }
@@ -41,74 +37,45 @@ export default async function ProjectPage({ params }: Props) {
   const { project, next } = found;
 
   return (
-    <article className={styles.page}>
-      <MorphTargetSync slug={project.slug} />
-      <div className={styles.top}>
-        <BackButton />
-        <span className={styles.year}>{project.year}</span>
-      </div>
-
-      <ViewTransition name={`cover-${project.slug}`} share="morph" default="none">
-        <Cover
-          pattern={project.pattern}
-          image={project.cover}
-          title={project.title}
-          priority
-          className={styles.cover}
-        />
-      </ViewTransition>
-
-      <header className={styles.header}>
-        <h1 className={styles.title}>{project.title}</h1>
-        <p className={styles.summary}>{project.summary}</p>
+    <article className="project-page">
+      <Link className="secondary" href="/#projects">
+        ← Kembali ke proyek
+      </Link>
+      <header className="project-header">
+        <div className="eyebrow mono">PROJECT NOTES / {project.year}</div>
+        <h1>{project.title}</h1>
+        <p>{project.description}</p>
+        <div className="tags">
+          {project.tools.map((tool) => (
+            <span key={tool}>{tool}</span>
+          ))}
+        </div>
       </header>
-
-      <dl className={styles.facts}>
+      <div className="project-cover">
+        <ProjectArt kind={project.kind} />
+      </div>
+      <dl className="project-facts">
         <div>
-          <dt>peran</dt>
+          <dt>Peran</dt>
           <dd>{project.role}</dd>
         </div>
         <div>
-          <dt>tools</dt>
-          <dd>{project.tools.join(", ")}</dd>
+          <dt>Teknologi</dt>
+          <dd>{project.tools.join(" · ")}</dd>
         </div>
         <div>
-          <dt>tahun</dt>
+          <dt>Tahun</dt>
           <dd>{project.year}</dd>
         </div>
-        {(project.link || project.repo) && (
-          <div>
-            <dt>tautan</dt>
-            <dd className={styles.links}>
-              {project.link && (
-                <a href={project.link} target="_blank" rel="noreferrer">
-                  lihat live ↗
-                </a>
-              )}
-              {project.repo && (
-                <a href={project.repo} target="_blank" rel="noreferrer">
-                  repo ↗
-                </a>
-              )}
-            </dd>
-          </div>
-        )}
       </dl>
-
-      <div className={styles.prose}>
+      <div className="prose">
         <MDXRemote source={project.content} />
       </div>
-
       {next.slug !== project.slug && (
-        <MorphLink slug={next.slug} className={styles.next} data-cursor="lanjut">
-          <span className={styles.nextLabel}>proyek berikutnya</span>
-          <span className={styles.nextTitle}>
-            {next.title} <span aria-hidden="true">→</span>
-          </span>
-          <MorphCover slug={next.slug}>
-            <Cover pattern={next.pattern} image={next.cover} title={next.title} className={styles.nextCover} />
-          </MorphCover>
-        </MorphLink>
+        <Link className="next-project" href={`/karya/${next.slug}`}>
+          <span className="eyebrow mono">PROYEK BERIKUTNYA</span>
+          <span>{next.title} ↗</span>
+        </Link>
       )}
     </article>
   );

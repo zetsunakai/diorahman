@@ -1,60 +1,122 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState, type FormEvent } from "react";
+import { Dialog } from "@/components/Dialog";
 import { site } from "@/lib/site";
-import { MagneticButton } from "./MagneticButton";
-import styles from "./Contact.module.css";
+
+const storageKey = "dio-contact-email";
 
 export function Contact() {
-  const [copied, setCopied] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [draft, setDraft] = useState("");
+  const [editing, setEditing] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(site.email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      window.location.href = `mailto:${site.email}`;
+  const showContact = () => {
+    let saved = site.email;
+    if (!saved) {
+      try {
+        saved = localStorage.getItem(storageKey) || "";
+      } catch {
+        /* Storage may be unavailable in private browsing. */
+      }
     }
+    setEmail(saved);
+    setDraft(saved);
+    setEditing(!saved);
+    setOpen(true);
+  };
+
+  const saveContact = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const value = draft.trim();
+    if (!value || !inputRef.current?.checkValidity()) return;
+    try {
+      localStorage.setItem(storageKey, value);
+    } catch {
+      /* Keep the contact available for this visit. */
+    }
+    setEmail(value);
+    setEditing(false);
   };
 
   return (
-    <section id="kontak" className={styles.contact} aria-labelledby="kontak-title">
-      <p className={styles.label}>kontak</p>
-      <h2 id="kontak-title" className={styles.title}>
-        punya ide yang ingin bergerak? ayo ngobrol.
-      </h2>
-
-      <div className={styles.actions}>
-        <MagneticButton href={`mailto:${site.email}`} className={styles.magnetic}>
-          kirim email <span aria-hidden="true">→</span>
-        </MagneticButton>
-        <button type="button" className={styles.copy} onClick={copy}>
-          {site.email}
-          <span className={styles.copyHint}>{copied ? "tersalin!" : "salin"}</span>
-        </button>
-        <span className={styles.srOnly} aria-live="polite">
-          {copied ? "Alamat email tersalin" : ""}
-        </span>
+    <section className="contact" id="contact" aria-labelledby="contact-heading">
+      <div>
+        <div className="eyebrow mono">03 / WHAT&apos;S NEXT?</div>
+        <h2 id="contact-heading">Ide bagus dimulai dari obrolan.</h2>
+        <p>
+          Punya ide website, aplikasi web, atau sistem untuk bisnis? Mari
+          ngobrol dan cari cara untuk mewujudkannya.
+        </p>
       </div>
-
-      <footer className={styles.footer}>
-        <ul className={styles.socials}>
-          {site.socials.map((s) => (
-            <li key={s.label}>
-              <a href={s.href} target="_blank" rel="noreferrer">
-                {s.label}
-              </a>
-            </li>
-          ))}
-          <li>
-            <a href={site.cv} download>
-              Unduh CV
+      <button
+        type="button"
+        className="primary"
+        onClick={showContact}
+        aria-haspopup="dialog"
+      >
+        Mari ngobrol <span aria-hidden="true">↗</span>
+      </button>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        labelledBy="contact-title"
+      >
+        <div className="eyebrow mono">LET&apos;S CONNECT</div>
+        <h2 id="contact-title">
+          {email ? "Mari terhubung." : "Lengkapi kontak profil."}
+        </h2>
+        <p>
+          {email
+            ? "Klik email berikut untuk membuka aplikasi email kamu."
+            : "Desain profil sudah siap. Tambahkan email yang ingin ditampilkan untuk mencoba tombol kontak."}
+        </p>
+        {editing ? (
+          <form onSubmit={saveContact}>
+            <label htmlFor="contact-email">Email kontak</label>
+            <input
+              ref={inputRef}
+              id="contact-email"
+              type="email"
+              autoComplete="email"
+              placeholder="nama@domain.com"
+              required
+              maxLength={254}
+              value={draft}
+              onChange={(event) => setDraft(event.target.value)}
+            />
+            <button className="primary" type="submit">
+              Simpan di browser ini <span aria-hidden="true">↗</span>
+            </button>
+          </form>
+        ) : (
+          <div>
+            <a
+              className="contact-saved"
+              href={`mailto:${encodeURIComponent(email)}`}
+            >
+              {email}
             </a>
-          </li>
-        </ul>
-        <p>© 2026 {site.name}</p>
-      </footer>
+            {!site.email && (
+              <button
+                type="button"
+                className="primary"
+                onClick={() => setEditing(true)}
+              >
+                Ubah email
+              </button>
+            )}
+          </div>
+        )}
+        {!site.email && (
+          <p className="dialog-note">
+            Email tersimpan hanya di browser ini. Untuk kontak yang terlihat
+            oleh semua pengunjung, email perlu ditambahkan ke konten situs.
+          </p>
+        )}
+      </Dialog>
     </section>
   );
 }

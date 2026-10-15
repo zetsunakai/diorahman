@@ -1,0 +1,37 @@
+---
+title: Inventory Reporting
+slug: inventory-reporting
+kind: inventory
+year: 2026
+role: Odoo Developer
+tools: [PostgreSQL, Odoo, SQL]
+detailTools: [PostgreSQL, SQL, Odoo Inventory]
+summary: Laporan mutasi bahan baku, saldo stok, dan stock opname.
+description: Pengembangan laporan mutasi bahan baku dengan penelusuran pergerakan dan saldo stok gudang.
+features:
+  - Query SQL untuk merangkum transaksi masuk dan keluar.
+  - Filter periode dan gudang untuk kebutuhan analisis.
+  - Penanganan periode tanpa stock opname menggunakan saldo terakhir.
+  - Pelaporan selisih stok dan keterangan stock opname.
+featured: false
+order: 5
+---
+
+## Kebutuhan
+
+Pergerakan bahan baku, saldo gudang, dan hasil stock opname perlu dibaca melalui laporan yang dapat difilter berdasarkan periode dan gudang.
+
+## Implementasi
+
+Query SQL merangkum transaksi stok masuk dan keluar. Pada periode tanpa stock opname, laporan menggunakan saldo terakhir sebagai dasar perhitungan.
+
+Selisih stok dan keterangan stock opname disertakan untuk membantu penelusuran perubahan saldo.
+
+## Cakupan
+
+- Ringkasan mutasi bahan baku dengan PostgreSQL.
+- Filter periode dan gudang.
+- Perhitungan saldo berdasarkan catatan terakhir.
+- Pelaporan selisih dan keterangan stock opname.
+
+_Visual antarmuka merupakan ilustrasi, bukan tangkapan layar aplikasi produksi._
