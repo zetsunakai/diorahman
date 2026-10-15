@@ -12,7 +12,7 @@ const skills = [
   },
   {
     title: "Backend & Database",
-    tools: "Python · PostgreSQL · Drizzle ORM · Supabase",
+    tools: "Python · Django · PostgreSQL · Drizzle ORM · Supabase",
     description:
       "Data stok dan akses pengguna di IT Inventory; autentikasi admin di MUA Ranni.",
     project: "IT Inventory",
@@ -20,7 +20,7 @@ const skills = [
   },
   {
     title: "Business Applications",
-    tools: "Odoo · Custom Module · Workflow",
+    tools: "Odoo · HMX · Custom Module · Workflow",
     description:
       "Menghubungkan sales order, penjadwalan tim, dan work order dalam alur Odoo.",
     project: "Booking & Work Order",
@@ -40,7 +40,7 @@ export function About() {
   return (
     <section className="section about" id="about" aria-labelledby="about-title">
       <div className="about-heading">
-        <p className="eyebrow mono">02 / TENTANG SAYA</p>
+        <p className="eyebrow mono">03 / TENTANG SAYA</p>
         <h2 id="about-title">
           Memahami proses,
           <br />
@@ -62,8 +62,8 @@ export function About() {
           <p>
             Di MUA Ranni, fokusnya mempertemukan portofolio, jadwal, dan
             pemesanan. Di IT Inventory, saya berhadapan dengan transaksi gudang
-            dan hak akses. Pengalaman Python dan Odoo memberi saya konteks untuk
-            memahami proses bisnis di balik layar.
+            dan hak akses. Kontribusi pada Odoo dan HMX mengasah pemahaman saya
+            terhadap produksi, inventory, dan proses bisnis di balik layar.
           </p>
           <p>
             Saya membawa pendekatan itu ke pekerjaan full-stack: membangun

@@ -25,6 +25,8 @@ npm start
 | Ilustrasi antarmuka                                  | `components/Works/ProjectArt.tsx`    |
 | Token warna, layout, dan responsivitas               | `app/globals.css`                    |
 
+Bagian pengalaman memakai `lib/experience.ts` dan `components/Experience.tsx`. Dasar penulisan dan batasan pembacaan riwayat Git dicatat di [docs/experience-evidence.md](docs/experience-evidence.md). Periode kontribusi kode tidak mewakili tanggal masa kerja.
+
 Kartu menyediakan ringkasan dalam dialog serta tautan **Baca Studi Kasus** ke `/karya/[slug]`. Setiap studi kasus memuat ringkasan, kebutuhan, peran dan kontribusi, implementasi, tantangan teknis, dan hasil.
 
 ### Kontak dan CV

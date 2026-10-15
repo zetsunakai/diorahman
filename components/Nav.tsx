@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const links = [
-  { id: "home", label: "Beranda" },
   { id: "projects", label: "Proyek" },
+  { id: "experience", label: "Pengalaman" },
   { id: "about", label: "Tentang" },
   { id: "contact", label: "Kontak" },
 ];
