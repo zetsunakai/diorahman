@@ -20,7 +20,7 @@ npm start
 | Nama, peran, intro, URL, email, GitHub, LinkedIn, CV | `lib/site.ts`                        |
 | Metadata, fitur, dan studi kasus proyek              | `content/projects/*.mdx`             |
 | Profil dan keahlian beserta contoh penerapannya      | `components/About.tsx`               |
-| Hero dan terminal                                    | `components/Hero/Hero.tsx`           |
+| Hero dan arsitektur 3D                               | `components/Hero/Hero.tsx`           |
 | Screenshot dan fallback ilustrasi                    | `components/Works/ProjectVisual.tsx` |
 | Ilustrasi antarmuka                                  | `components/Works/ProjectArt.tsx`    |
 | Token warna, layout, dan responsivitas               | `app/globals.css`                    |
@@ -49,6 +49,19 @@ Model juga mendukung `link` untuk demo dan `repo` untuk source (URL HTTPS). Hany
 Screenshot ditampilkan dengan `next/image`, rasio 16:10, dan `sizes` responsif. Path lokal, keberadaan file, dan alt text diperiksa saat konten dibaca. Field kosong, file hilang, atau alt yang belum diisi memakai ilustrasi. Kegagalan pemuatan di browser juga kembali ke ilustrasi.
 
 Konten IT Inventory dan MUA Ranni dicocokkan dengan source proyek yang tersedia di folder PRJ. Materi Odoo mengikuti dokumentasi fitur yang sudah ada dalam repo. Jangan menambahkan angka dampak, riwayat produksi, atau kontribusi yang belum didukung data.
+
+### Hero 3D
+
+Hero menampilkan alur **Frontend → Backend → Database** menggunakan Three.js dan React Three Fiber. Tidak menggunakan model, tekstur, atau font 3D dari layanan eksternal. `@types/three` hanya digunakan untuk pengembangan TypeScript.
+
+- `components/Hero/ArchitectureHero.tsx`: pemuatan client, deteksi kemampuan, tautan keyboard, dan fallback.
+- `components/Hero/ArchitectureScene.tsx`: geometri, pencahayaan, interaksi pointer, dan render on demand.
+- `components/Hero/ArchitectureFallback.tsx`: diagram SVG untuk tampilan awal, layar kecil, reduced motion, atau WebGL yang tidak tersedia.
+- `components/Hero/architecture.ts`: nama lapisan, deskripsi, dan tujuan tautan studi kasus/pengalaman.
+
+Scene dimuat terpisah saat area hero masuk layar pada viewport minimal 768px. Di bawah ukuran itu, saat reduced motion aktif, atau saat browser mengaktifkan penghematan data, diagram statis tetap menyediakan tautan yang sama. Kegagalan WebGL atau hilangnya context juga mengembalikan tampilan ke diagram.
+
+Gerakan pointer memberi kemiringan kecil, sedangkan perubahan lapisan memicu satu lintasan paket data. Tidak ada putaran animasi permanen. Render berhenti saat idle dan dijeda ketika hero keluar layar atau tab disembunyikan. Resolusi renderer dibatasi hingga DPR 1.5.
 
 ## Verifikasi
 

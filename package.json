@@ -8,16 +8,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "@react-three/fiber": "^9.8.2",
     "gray-matter": "^4.0.3",
     "next": "^16.3.7",
     "next-mdx-remote": "^6.0.0",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react-dom": "^19.3.0",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.186.0",
     "typescript": "^7.0.2"
   }
 }
