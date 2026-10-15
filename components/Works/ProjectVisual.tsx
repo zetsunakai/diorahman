@@ -21,18 +21,23 @@ export function ProjectVisual({ project, priority = false }: Props) {
   return (
     <figure className="project-figure">
       <div className="project-image">
-        {hasScreenshot ? (
-          <Image
-            src={project.screenshot!}
-            alt={project.screenshotAlt!}
-            fill
-            sizes="(max-width: 720px) calc(100vw - 40px), (max-width: 1000px) 85vw, 720px"
-            preload={priority}
-            onError={() => setFailedSource(project.screenshot!)}
-          />
-        ) : (
-          <ProjectArt kind={project.kind} />
-        )}
+        <div
+          className={`project-media-content${hasScreenshot ? "" : " is-illustration"}`}
+          data-scroll-parallax={hasScreenshot ? undefined : "cover"}
+        >
+          {hasScreenshot ? (
+            <Image
+              src={project.screenshot!}
+              alt={project.screenshotAlt!}
+              fill
+              sizes="(max-width: 720px) calc(100vw - 40px), (max-width: 1000px) 85vw, 720px"
+              preload={priority}
+              onError={() => setFailedSource(project.screenshot!)}
+            />
+          ) : (
+            <ProjectArt kind={project.kind} />
+          )}
+        </div>
       </div>
       <figcaption>
         {hasScreenshot

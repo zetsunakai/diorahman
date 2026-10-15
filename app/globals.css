@@ -1384,7 +1384,8 @@ dialog li + li {
 }
 @media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: auto;
+    /* ScrollTrigger can restore an inline smooth value after refreshing. */
+    scroll-behavior: auto !important;
   }
   *,
   *::before,
@@ -1566,5 +1567,93 @@ dialog li + li {
   }
   .architecture-caption {
     min-height: 126px;
+  }
+}
+
+.navlinks {
+  position: relative;
+}
+.nav-indicator {
+  position: absolute;
+  left: 0;
+  bottom: 1px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  pointer-events: none;
+  transition:
+    transform 0.25s ease,
+    width 0.25s ease,
+    opacity 0.2s ease;
+}
+.experience-list {
+  position: relative;
+  padding-left: 28px;
+}
+.experience-entry {
+  position: relative;
+}
+.experience-entry::before {
+  content: "";
+  position: absolute;
+  left: -32px;
+  top: 44px;
+  width: 10px;
+  height: 10px;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  z-index: 1;
+}
+.experience-track {
+  position: absolute;
+  left: 0;
+  top: 48px;
+  bottom: 36px;
+  width: 2px;
+  overflow: hidden;
+  background: var(--line);
+}
+.experience-progress {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: top center;
+}
+.project-media-content {
+  position: absolute;
+  inset: 0;
+}
+.project-media-content.is-illustration {
+  inset: -12px 0;
+}
+.project-image img {
+  object-fit: contain;
+}
+@media (max-width: 720px) {
+  .experience-list {
+    padding-left: 22px;
+  }
+  .experience-entry::before {
+    left: -26px;
+    top: 36px;
+  }
+  .experience-track {
+    top: 40px;
+    bottom: 28px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .project-media-content,
+  .experience-progress {
+    transform: none !important;
+  }
+  .nav-indicator {
+    transition: none;
   }
 }

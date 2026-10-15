@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { DM_Sans, Space_Grotesk } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { ScrollEffects } from "@/components/ScrollEffects";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -56,6 +57,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <ScrollEffects />
       </body>
     </html>
   );

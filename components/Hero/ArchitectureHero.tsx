@@ -44,6 +44,7 @@ export function ArchitectureHero() {
   const [failed, setFailed] = useState(false);
   const [active, setActive] = useState<ArchitectureLayer>("frontend");
   const [pointer, setPointer] = useState<[number, number]>([0, 0]);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const pendingPointer = useRef<[number, number]>([0, 0]);
   const pointerFrame = useRef<number | null>(null);
   const selected = architectureLayers.find((layer) => layer.id === active)!;
@@ -111,6 +112,37 @@ export function ArchitectureHero() {
     setReady(false);
   }, []);
 
+  useEffect(() => {
+    if (!eligible || !hasEntered || failed) {
+      setScrollProgress(0);
+      return;
+    }
+    let disposed = false;
+    let cleanup: (() => void) | undefined;
+    Promise.all([import("gsap"), import("gsap/ScrollTrigger")])
+      .then(([{ gsap }, { ScrollTrigger }]) => {
+        if (disposed) return;
+        const hero = frame.current?.closest(".hero");
+        if (!hero) return;
+        gsap.registerPlugin(ScrollTrigger);
+        const trigger = ScrollTrigger.create({
+          trigger: hero,
+          start: "top top",
+          end: "bottom top",
+          onUpdate: (self) => setScrollProgress(self.progress),
+          onRefresh: (self) => setScrollProgress(self.progress),
+        });
+        cleanup = () => trigger.kill();
+      })
+      .catch(() => {
+        /* Pointer interaction remains usable without scroll enhancement. */
+      });
+    return () => {
+      disposed = true;
+      cleanup?.();
+    };
+  }, [eligible, hasEntered, failed]);
+
   const move = (event: PointerEvent<HTMLDivElement>) => {
     if (!eligible || failed || event.pointerType === "touch") return;
     const rect = event.currentTarget.getBoundingClientRect();
@@ -157,6 +189,7 @@ export function ArchitectureHero() {
               <ArchitectureScene
                 active={active}
                 pointer={pointer}
+                scrollProgress={scrollProgress}
                 paused={!inView || !pageVisible}
                 onHighlight={setActive}
                 onReady={onReady}

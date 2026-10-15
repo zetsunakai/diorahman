@@ -63,6 +63,14 @@ Scene dimuat terpisah saat area hero masuk layar pada viewport minimal 768px. Di
 
 Gerakan pointer memberi kemiringan kecil, sedangkan perubahan lapisan memicu satu lintasan paket data. Tidak ada putaran animasi permanen. Render berhenti saat idle dan dijeda ketika hero keluar layar atau tab disembunyikan. Resolusi renderer dibatasi hingga DPR 1.5.
 
+### Animasi scroll
+
+`components/ScrollEffects.tsx` memuat GSAP dan ScrollTrigger secara terpisah untuk reveal sekali per kunjungan halaman, stagger kartu/keahlian, parallax tipis pada ilustrasi, serta garis progres pengalaman. Screenshot asli tidak digerakkan atau dipotong untuk efek parallax.
+
+Hero 3D menambahkan sedikit rotasi dan pergeseran berdasarkan posisi scroll. Interaksi pointer tetap tersedia dan renderer tetap berhenti saat idle atau di luar layar. Navigasi memakai scroll native dengan penanda menu yang mengikuti posisi section.
+
+Halaman studi kasus memakai reveal singkat pada judul, visual, dan blok konten; daftar isi tetap sticky. Effect dibersihkan ketika route berganti. Konten terlihat secara default tanpa JavaScript, fokus keyboard langsung menampilkan blok terkait, dan perubahan prefers-reduced-motion mengembalikan seluruh konten ke tampilan statis.
+
 ## Verifikasi
 
 ```bash

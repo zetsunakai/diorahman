@@ -23,6 +23,7 @@ type Triplet = [number, number, number];
 type Props = {
   active: ArchitectureLayer;
   pointer: [number, number];
+  scrollProgress: number;
   paused: boolean;
   onHighlight: (layer: ArchitectureLayer) => void;
   onReady: () => void;
@@ -330,21 +331,26 @@ function Flow({ active, paused }: Pick<Props, "active" | "paused">) {
 function Application({
   active,
   pointer,
+  scrollProgress,
   paused,
   onHighlight,
   onNavigate,
-}: Pick<Props, "active" | "pointer" | "paused" | "onHighlight"> & {
+}: Pick<
+  Props,
+  "active" | "pointer" | "scrollProgress" | "paused" | "onHighlight"
+> & {
   onNavigate: (id: ArchitectureLayer) => void;
 }) {
   const group = useRef<Group>(null);
   const invalidate = useThree((state) => state.invalidate);
   useEffect(() => {
     invalidate();
-  }, [pointer, paused, invalidate]);
+  }, [pointer, scrollProgress, paused, invalidate]);
   useFrame((_, delta) => {
     if (!group.current || paused) return;
-    const targetX = -pointer[1] * 0.055;
-    const targetY = pointer[0] * 0.11;
+    const targetX = -pointer[1] * 0.055 + scrollProgress * 0.045;
+    const targetY = pointer[0] * 0.11 + scrollProgress * 0.15;
+    group.current.position.y = -scrollProgress * 0.22;
     group.current.rotation.x = MathUtils.damp(
       group.current.rotation.x,
       targetX,
@@ -464,6 +470,7 @@ export default function ArchitectureScene(props: Props) {
       <Application
         active={props.active}
         pointer={props.pointer}
+        scrollProgress={props.scrollProgress}
         paused={props.paused}
         onHighlight={props.onHighlight}
         onNavigate={navigate}

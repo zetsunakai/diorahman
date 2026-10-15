@@ -4,7 +4,7 @@ import { ArchitectureHero } from "./ArchitectureHero";
 export function Hero() {
   return (
     <section className="hero" id="home" aria-labelledby="hero-title">
-      <div>
+      <div className="hero-copy">
         <div className="eyebrow mono">{site.name}</div>
         <p className="hero-role">{site.role}</p>
         <h1 id="hero-title">

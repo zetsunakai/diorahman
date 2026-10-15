@@ -18,6 +18,9 @@ export function Experience() {
         </p>
       </div>
       <div className="experience-list">
+        <span className="experience-track" aria-hidden="true">
+          <span className="experience-progress" />
+        </span>
         {experiences.map((experience) => (
           <article
             className="experience-entry"

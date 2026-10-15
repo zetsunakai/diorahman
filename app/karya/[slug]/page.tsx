@@ -88,12 +88,12 @@ export default async function ProjectPage({ params }: Props) {
           <p className="mono">DALAM STUDI KASUS INI</p>
           <nav aria-label="Isi studi kasus">
             {sections.map((title, index) => (
-              <a href={`#${sectionId(title)}`} key={title}>
+              <Link href={`#${sectionId(title)}`} key={title}>
                 <span aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 {title}
-              </a>
+              </Link>
             ))}
           </nav>
         </aside>
