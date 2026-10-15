@@ -12,7 +12,7 @@ export function ProjectGallery({ projects }: { projects: ProjectMeta[] }) {
   return (
     <section className="section" id="projects" aria-labelledby="projects-title">
       <div className="section-top">
-        <h2 id="projects-title">Beberapa proyek yang saya kerjakan.</h2>
+        <h2 id="projects-title">Proyek yang dikerjakan.</h2>
       </div>
       <div className="projects">
         {projects.map((project, index) => (

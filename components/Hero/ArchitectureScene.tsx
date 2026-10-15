@@ -348,9 +348,15 @@ function Application({
   }, [pointer, scrollProgress, paused, invalidate]);
   useFrame((_, delta) => {
     if (!group.current || paused) return;
-    const targetX = -pointer[1] * 0.055 + scrollProgress * 0.045;
-    const targetY = pointer[0] * 0.11 + scrollProgress * 0.15;
-    group.current.position.y = -scrollProgress * 0.22;
+    const targetX = -pointer[1] * 0.055 + scrollProgress * 0.08;
+    const targetY = pointer[0] * 0.11 + scrollProgress * 0.24;
+    const targetHeight = -scrollProgress * 0.3;
+    group.current.position.y = MathUtils.damp(
+      group.current.position.y,
+      targetHeight,
+      8,
+      Math.min(delta, 0.05),
+    );
     group.current.rotation.x = MathUtils.damp(
       group.current.rotation.x,
       targetX,
@@ -365,7 +371,8 @@ function Application({
     );
     if (
       Math.abs(group.current.rotation.x - targetX) +
-        Math.abs(group.current.rotation.y - targetY) >
+        Math.abs(group.current.rotation.y - targetY) +
+        Math.abs(group.current.position.y - targetHeight) >
       0.0002
     )
       invalidate();

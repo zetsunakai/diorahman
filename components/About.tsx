@@ -22,11 +22,11 @@ const skills = [
   },
   {
     title: "Business Applications",
-    tools: "Odoo · HMX · Custom Module · Workflow",
+    tools: "Odoo · HMX · Manufacturing/Production · Workflow",
     description:
-      "Saya menyesuaikan integrasi CEISA, laporan inventory, dan alur approval pada modul Odoo.",
-    project: "Penyesuaian Integrasi CEISA",
-    slug: "integrasi-ceisa",
+      "Saya mengembangkan modul Manufacturing/Production di Odoo dan HMX, termasuk perencanaan produksi, reservasi material, dan approval.",
+    project: "Manufacturing Approval",
+    slug: "manufacturing-approval",
   },
   {
     title: "Tools",
@@ -42,14 +42,7 @@ export function About() {
   return (
     <section className="section about" id="about" aria-labelledby="about-title">
       <div className="about-heading">
-        <h2 id="about-title">
-          Tentang
-          <br />
-          saya
-        </h2>
-        <p className="about-aside">
-          React/Next.js, Python, Odoo, dan HMX.
-        </p>
+        <h2 id="about-title">Tentang Saya</h2>
         <figure className="about-portrait">
           <div className="portrait-frame">
             <Image
@@ -79,20 +72,16 @@ export function About() {
             transaksi gudang.
           </p>
           <p>
-            Di HashMicro, saya berkontribusi pada modul Odoo dan HMX.
-            Pekerjaannya meliputi laporan inventory, integrasi CEISA,
-            perencanaan produksi, dan alur persetujuan.
+            Di HashMicro, saya bekerja sebagai ERP Developer dengan fokus pada
+            modul Manufacturing/Production di Odoo dan HMX. Saya mengerjakan
+            perencanaan produksi, reservasi material, dan alur persetujuan,
+            serta laporan inventory dan integrasi CEISA.
           </p>
         </div>
         <div className="skills">
-          {skills.map((skill, index) => (
+          {skills.map((skill) => (
             <div className="skill" key={skill.title}>
-              <h3>
-                <span aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                {skill.title}
-              </h3>
+              <h3>{skill.title}</h3>
               <p className="skill-tools">{skill.tools}</p>
               <p>{skill.description}</p>
               <Link className="text-link" href={`/karya/${skill.slug}`}>

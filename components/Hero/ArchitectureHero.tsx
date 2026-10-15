@@ -47,7 +47,6 @@ export function ArchitectureHero() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const pendingPointer = useRef<[number, number]>([0, 0]);
   const pointerFrame = useRef<number | null>(null);
-  const selected = architectureLayers.find((layer) => layer.id === active)!;
 
   useEffect(() => {
     const wide = matchMedia("(min-width: 768px)");
@@ -225,10 +224,6 @@ export function ArchitectureHero() {
           </Link>
         ))}
       </div>
-      <figcaption className="architecture-caption">
-        <p>{selected.description}</p>
-        <span>Pilih bagian untuk melihat contoh pekerjaan saya.</span>
-      </figcaption>
     </figure>
   );
 }
