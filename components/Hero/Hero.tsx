@@ -4,34 +4,34 @@ export function Hero() {
   return (
     <section className="hero" id="home" aria-labelledby="hero-title">
       <div>
-        <div className="eyebrow mono">
-          <span className="dot" aria-hidden="true" /> HELLO, WORLD. SAYA DIO.
-        </div>
+        <div className="eyebrow mono">{site.name}</div>
+        <p className="hero-role">{site.role}</p>
         <h1 id="hero-title">
-          Mengubah logika
+          Aplikasi web.
           <br />
-          menjadi <span>solusi.</span>
+          <span>Alur kerja yang jelas.</span>
         </h1>
         <p>{site.intro}</p>
         <div className="actions">
           <a className="primary" href="#projects">
-            Jelajahi proyek <span aria-hidden="true">↗</span>
+            Lihat Proyek <span aria-hidden="true">↗</span>
           </a>
-          <a className="secondary" href="#about">
+          {site.cv && (
+            <a className="secondary" href={site.cv} download>
+              Download CV <span aria-hidden="true">↓</span>
+            </a>
+          )}
+          <a className="text-link" href="#about">
             Kenali saya <span aria-hidden="true">↓</span>
           </a>
         </div>
-        <div className="smallnote">
-          <span aria-hidden="true">⌘</span> Dibangun dengan rasa ingin tahu
-          &amp; secangkir kopi.
-        </div>
+        <p className="hero-note">React / Next.js · Python · Pengalaman Odoo</p>
       </div>
       <div
         className="hero-art"
         role="img"
         aria-label={`Ilustrasi terminal Python: profil ${site.name}, ${site.role} dengan stack React, Next.js, Tailwind CSS, dan Docker.`}
       >
-        <div className="orbit" aria-hidden="true" />
         <div className="terminal" aria-hidden="true">
           <div className="termbar">
             <i />
@@ -94,13 +94,6 @@ export function Hero() {
               <span className="ln">10</span>
               <span className="gray"># always learning, always building.</span>
             </div>
-          </div>
-        </div>
-        <div className="floating" aria-hidden="true">
-          <span className="float-icon">&lt;/&gt;</span>
-          <div>
-            <b>Business meets code.</b>
-            <small>Satu solusi, satu langkah lebih baik.</small>
           </div>
         </div>
       </div>

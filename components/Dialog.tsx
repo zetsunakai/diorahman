@@ -28,6 +28,24 @@ export function Dialog({ open, onClose, labelledBy, children }: Props) {
     <dialog
       ref={ref}
       aria-labelledby={labelledBy}
+      onKeyDown={(event) => {
+        if (event.key !== "Tab") return;
+        const elements = Array.from(
+          event.currentTarget.querySelectorAll<HTMLElement>(
+            'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter((element) => element.getClientRects().length > 0);
+        const first = elements[0];
+        const last = elements.at(-1);
+        if (!first || !last) return;
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }}
       onCancel={(event) => {
         event.preventDefault();
         onClose();

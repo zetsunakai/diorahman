@@ -1,6 +1,7 @@
 ---
 title: Inventory Reporting
 slug: inventory-reporting
+category: Pelaporan Odoo
 kind: inventory
 year: 2026
 role: Odoo Developer
@@ -17,21 +18,35 @@ featured: false
 order: 5
 ---
 
+## Ringkasan
+
+Inventory Reporting mendokumentasikan laporan mutasi bahan baku, saldo stok, dan stock opname di Odoo. Fokusnya menelusuri pergerakan stok dalam periode dan gudang tertentu.
+
 ## Kebutuhan
 
-Pergerakan bahan baku, saldo gudang, dan hasil stock opname perlu dibaca melalui laporan yang dapat difilter berdasarkan periode dan gudang.
+Transaksi masuk dan keluar perlu dirangkum agar saldo serta selisih stok dapat dibaca dalam satu laporan. Periode tanpa stock opname tetap membutuhkan dasar saldo yang jelas.
+
+## Peran dan kontribusi
+
+Peran yang tercantum adalah **Odoo Developer**, dengan cakupan query PostgreSQL dan penyusunan informasi laporan inventory.
+
+- Merangkum transaksi masuk dan keluar dengan SQL.
+- Menyediakan filter periode dan gudang.
+- Menggunakan saldo terakhir untuk periode tanpa stock opname.
+- Menyertakan selisih stok dan keterangan stock opname.
 
 ## Implementasi
 
-Query SQL merangkum transaksi stok masuk dan keluar. Pada periode tanpa stock opname, laporan menggunakan saldo terakhir sebagai dasar perhitungan.
+Query SQL merangkum transaksi bahan baku berdasarkan periode dan gudang. Untuk periode tanpa stock opname, saldo terakhir digunakan sebagai dasar perhitungan.
 
-Selisih stok dan keterangan stock opname disertakan untuk membantu penelusuran perubahan saldo.
+Informasi selisih dan keterangan stock opname ditampilkan untuk membantu penelusuran perubahan saldo.
 
-## Cakupan
+## Tantangan teknis
 
-- Ringkasan mutasi bahan baku dengan PostgreSQL.
-- Filter periode dan gudang.
-- Perhitungan saldo berdasarkan catatan terakhir.
-- Pelaporan selisih dan keterangan stock opname.
+**Menghitung saldo tanpa stock opname pada periode berjalan.** Laporan perlu mengambil saldo terakhir agar transaksi tetap memiliki titik awal perhitungan.
 
-_Visual antarmuka merupakan ilustrasi, bukan tangkapan layar aplikasi produksi._
+**Menjaga konteks pergerakan.** Transaksi dan saldo perlu dibatasi oleh periode serta gudang yang sama agar informasi laporan dapat ditelusuri.
+
+## Hasil
+
+Materi proyek menjelaskan ringkasan mutasi, perhitungan saldo, dan pelaporan selisih stok. Source publik, demo, dan pengukuran dampak belum tersedia dalam dokumentasi ini.

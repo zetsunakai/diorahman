@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
+import { contactChannels, site } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -9,11 +9,24 @@ export function Footer() {
           dio<span>.</span>
         </Link>
         <span>
-          © {new Date().getFullYear()} {site.name}. Crafted with purpose.
+          © {new Date().getFullYear()} {site.name}. Dibangun dengan perhatian
+          pada detail.
         </span>
-        <Link href="/#home">
-          Kembali ke atas <span aria-hidden="true">↑</span>
-        </Link>
+        <div className="footer-links">
+          {contactChannels.map((channel) => (
+            <a
+              key={channel.label}
+              href={channel.href}
+              target={channel.label === "Email" ? undefined : "_blank"}
+              rel={channel.label === "Email" ? undefined : "noreferrer"}
+            >
+              {channel.label}
+            </a>
+          ))}
+          <Link href="/#home">
+            Ke atas <span aria-hidden="true">↑</span>
+          </Link>
+        </div>
       </div>
     </footer>
   );

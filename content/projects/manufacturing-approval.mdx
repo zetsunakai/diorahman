@@ -1,6 +1,7 @@
 ---
 title: Manufacturing Approval
 slug: manufacturing-approval
+category: Workflow Odoo
 kind: manufacturing
 year: 2026
 role: Odoo Developer
@@ -17,21 +18,34 @@ featured: false
 order: 4
 ---
 
+## Ringkasan
+
+Manufacturing Approval mendokumentasikan penyesuaian alur Odoo MRP agar manufacturing order dari production plan mengikuti persetujuan manual sesuai approval matrix.
+
 ## Kebutuhan
 
-Manufacturing order dari production plan perlu mengikuti persetujuan manual sesuai approval matrix sebelum dikonfirmasi.
+Manufacturing order yang memerlukan persetujuan perlu tetap berada pada tahap Draft sampai alur persetujuannya selesai. Pembuatan order tidak boleh langsung melewati proses tersebut.
+
+## Peran dan kontribusi
+
+Peran yang tercantum adalah **Odoo Developer**. Cakupannya menghubungkan pembuatan manufacturing order, persiapan baris approval, dan proses konfirmasi.
+
+- Menyesuaikan status awal order ketika approval matrix aktif.
+- Menyiapkan baris persetujuan sebelum approval manual.
+- Mengarahkan konfirmasi melalui alur approval manufacturing order.
 
 ## Implementasi
 
-Ketika approval matrix aktif, manufacturing order yang baru dibuat tetap berada dalam status Draft. Baris approval disiapkan agar proses persetujuan bisa dilakukan dari manufacturing order.
+Manufacturing order dibuat dari production plan. Ketika approval matrix aktif, order dipertahankan dalam status Draft dan baris approval disiapkan sebelum persetujuan manual.
 
-Konfirmasi produksi mengikuti alur persetujuan tersebut sehingga setiap langkah dapat ditelusuri.
+Konfirmasi kemudian dilakukan melalui alur persetujuan di manufacturing order.
 
-## Cakupan
+## Tantangan teknis
 
-- Pembuatan manufacturing order dari production plan.
-- Penanganan status Draft saat approval matrix aktif.
-- Persiapan baris approval.
-- Konfirmasi melalui persetujuan manual.
+**Menjaga urutan status.** Pembuatan order dan konfirmasi perlu dibedakan agar order tidak dianggap siap produksi sebelum persetujuan.
 
-_Visual antarmuka merupakan ilustrasi, bukan tangkapan layar aplikasi produksi._
+**Menyiapkan konteks persetujuan.** Baris approval perlu tersedia ketika pengguna memulai persetujuan manual.
+
+## Hasil
+
+Catatan yang tersedia menjelaskan alur Draft, persiapan approval, dan konfirmasi manual. Dokumentasi ini memperlihatkan penyesuaian workflow produksi di Odoo; belum disertai source publik, demo, atau pengukuran dampak.

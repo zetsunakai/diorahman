@@ -8,6 +8,7 @@ const links = [
   { id: "home", label: "Beranda" },
   { id: "projects", label: "Proyek" },
   { id: "about", label: "Tentang" },
+  { id: "contact", label: "Kontak" },
 ];
 
 export function Nav() {

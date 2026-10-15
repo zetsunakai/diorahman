@@ -1,45 +1,52 @@
 # Dio Rahman Alfateh — Full-Stack Developer Portfolio
 
-Portofolio Next.js App Router dan TypeScript dengan desain gelap, aksen lime, serta tipografi DM Sans dan Space Grotesk. Desain mengikuti referensi [Dio — Programmer Portfolio](https://dio-programmer-portfolio.duskyamber.chatgpt.site).
+Portofolio berbahasa Indonesia dengan Next.js App Router, TypeScript, konten MDX, tema gelap dan aksen lime, serta font DM Sans dan Space Grotesk. Menampilkan IT Inventory, MUA Ranni, dan pengembangan Odoo.
 
 ## Menjalankan
 
 ```bash
 npm install
-npm run dev
-# http://localhost:3000
+npm run dev -- --port 3001
+# http://localhost:3001
 
 npm run build
 npm start
 ```
 
-## Konten
+## Mengubah konten
 
-| Konten                                      | Lokasi                            |
-| ------------------------------------------- | --------------------------------- |
-| Nama, peran, intro, email publik, URL situs | `lib/site.ts`                     |
-| Proyek, catatan detail, teknologi           | `content/projects/*.mdx`          |
-| Profil dan daftar keahlian                  | `components/About.tsx`            |
-| Hero dan ilustrasi terminal                 | `components/Hero/Hero.tsx`        |
-| Ilustrasi antarmuka proyek                  | `components/Works/ProjectArt.tsx` |
-| Warna, tipografi, layout responsif          | `app/globals.css`                 |
+| Konten                                               | Lokasi                               |
+| ---------------------------------------------------- | ------------------------------------ |
+| Nama, peran, intro, URL, email, GitHub, LinkedIn, CV | `lib/site.ts`                        |
+| Metadata, fitur, dan studi kasus proyek              | `content/projects/*.mdx`             |
+| Profil dan keahlian beserta contoh penerapannya      | `components/About.tsx`               |
+| Hero dan terminal                                    | `components/Hero/Hero.tsx`           |
+| Screenshot dan fallback ilustrasi                    | `components/Works/ProjectVisual.tsx` |
+| Ilustrasi antarmuka                                  | `components/Works/ProjectArt.tsx`    |
+| Token warna, layout, dan responsivitas               | `app/globals.css`                    |
 
-Kartu proyek membuka dialog detail. Halaman `/karya/[slug]` juga tersedia untuk setiap proyek dan disertakan dalam sitemap.
+Kartu menyediakan ringkasan dalam dialog serta tautan **Baca Studi Kasus** ke `/karya/[slug]`. Setiap studi kasus memuat ringkasan, kebutuhan, peran dan kontribusi, implementasi, tantangan teknis, dan hasil.
 
-Isi `site.email` di `lib/site.ts` agar tombol kontak menampilkan alamat publik. Jika kosong, dialog kontak mengikuti demo referensi: pengunjung dapat mencoba menyimpan email di browser sendiri menggunakan localStorage. Email demo tidak tersimpan di server atau terlihat oleh pengunjung lain.
+### Kontak dan CV
 
-Karya pilihan menampilkan IT Inventory dan MUA Ranni berdasarkan kode proyek di folder PRJ, serta Booking & Work Order dari pengalaman Odoo. React, Next.js, TypeScript, Tailwind CSS, Python, PostgreSQL, Docker, Vite, dan Odoo ditampilkan sebagai toolkit.
+Kontak berasal dari `lib/site.ts`. GitHub aktif; `email` dan `linkedin` kosong karena belum ada kontak pribadi terverifikasi dalam repo. Kanal kosong disembunyikan. Tidak ada formulir demo atau penyimpanan kontak pengunjung.
 
-Ilustrasi proyek dibuat dengan HTML dan CSS, bukan tangkapan layar aplikasi produksi. Catatan proyek Odoo berasal dari referensi awal; sesuaikan dengan pengalaman dan data proyek yang ingin dipublikasikan.
+`public/cv.pdf` telah diperiksa: isinya masih placeholder. Karena itu `site.cv` bernilai `null` dan tombol **Download CV** tidak ditampilkan. Ganti PDF dengan CV asli, periksa isi dan data publiknya, lalu isi `cv: "/cv.pdf"` untuk mengaktifkan tombol.
 
-## Struktur
+### Screenshot, demo, dan source
 
-```text
-app/                  Layout, beranda, halaman proyek, SEO
-components/           Navigasi, hero, proyek, dialog, profil, kontak, footer
-content/projects/     Konten proyek MDX
-lib/                  Konfigurasi situs dan pembaca konten
+Belum ada screenshot asli dalam repo. Ilustrasi diberi caption yang jelas pada setiap proyek. Untuk memakai screenshot yang sudah disiapkan, simpan aset PNG, JPEG, WebP, atau AVIF di `public/projects/`, lalu tambahkan frontmatter:
+
+```yaml
+screenshot: /projects/nama-proyek.webp
+screenshotAlt: Deskripsi tampilan dan fungsi yang terlihat pada screenshot asli
 ```
+
+Model juga mendukung `link` untuk demo dan `repo` untuk source (URL HTTPS). Hanya tambahkan alamat yang sudah diperiksa dan memang tersedia bagi pengunjung. Demo MUA Ranni telah diverifikasi. Source IT Inventory dan MUA Ranni belum dapat diakses publik, sehingga tautannya tidak ditampilkan.
+
+Screenshot ditampilkan dengan `next/image`, rasio 16:10, dan `sizes` responsif. Path lokal, keberadaan file, dan alt text diperiksa saat konten dibaca. Field kosong, file hilang, atau alt yang belum diisi memakai ilustrasi. Kegagalan pemuatan di browser juga kembali ke ilustrasi.
+
+Konten IT Inventory dan MUA Ranni dicocokkan dengan source proyek yang tersedia di folder PRJ. Materi Odoo mengikuti dokumentasi fitur yang sudah ada dalam repo. Jangan menambahkan angka dampak, riwayat produksi, atau kontribusi yang belum didukung data.
 
 ## Verifikasi
 
@@ -47,3 +54,5 @@ lib/                  Konfigurasi situs dan pembaca konten
 npx tsc --noEmit
 npm run build
 ```
+
+Periksa beranda dan detail proyek pada lebar 360px, 768px, serta desktop. Cakupan browser mencakup navigasi keyboard, dialog (Escape, fokus, backdrop), tautan studi kasus, kontak, ketiadaan tautan CV placeholder, dan reduced motion.

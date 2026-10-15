@@ -1,6 +1,7 @@
 ---
 title: Booking & Work Order
 slug: booking-work-order
+category: Modul Odoo
 kind: booking
 year: 2026
 role: Odoo Developer
@@ -17,21 +18,37 @@ featured: true
 order: 3
 ---
 
+## Ringkasan
+
+Booking & Work Order adalah pengembangan alur Odoo yang menghubungkan penjadwalan service team, sales order, dan pelaksanaan pekerjaan. Catatan proyek berfokus pada validasi jadwal dan perpindahan status pekerjaan.
+
 ## Kebutuhan
 
-Jadwal pelanggan, ketersediaan service team, dan pelaksanaan pekerjaan perlu terhubung dalam satu alur di Sales.
+Jadwal pelanggan dan ketersediaan tim perlu diperiksa sebelum pekerjaan dikonfirmasi. Data leader serta anggota tim juga perlu mengikuti service team yang dipilih agar tidak diisi berulang.
+
+## Peran dan kontribusi
+
+Peran yang tercantum adalah **Odoo Developer**. Cakupan pengembangan pada catatan proyek meliputi logika Python dan penyesuaian tampilan XML untuk alur booking serta work order.
+
+- Mengisi leader dan anggota berdasarkan service team.
+- Memvalidasi waktu booking serta jadwal tim yang bertabrakan.
+- Menghubungkan konfirmasi sales order dengan pembuatan work order.
+- Menyusun status pekerjaan beserta pencatatan waktunya.
 
 ## Implementasi
 
-Pemilihan service team mengisi leader dan anggota secara otomatis. Validasi waktu booking memeriksa jadwal tim yang bertabrakan sebelum sales order dikonfirmasi.
+Pemilihan service team mengisi data leader dan anggota secara otomatis. Validasi waktu memeriksa benturan jadwal sebelum sales order dikonfirmasi.
 
-Konfirmasi sales order membuat work order yang dapat dilanjutkan melalui status Pending, In Progress, Done, atau Cancel dengan pencatatan waktu pelaksanaan.
+Konfirmasi sales order membuat work order yang dilanjutkan melalui status Pending, In Progress, Done, atau Cancel. Waktu pelaksanaan dicatat sepanjang alur pekerjaan.
 
-## Cakupan
+## Tantangan teknis
 
-- Pengisian otomatis leader dan anggota tim.
-- Validasi waktu dan benturan jadwal.
-- Pembuatan work order dari sales order.
-- Pelacakan status dan waktu pekerjaan.
+**Menghubungkan data antardokumen.** Data tim dan jadwal perlu terbawa dari booking menuju work order tanpa pengisian ulang yang tidak diperlukan.
 
-_Visual antarmuka merupakan ilustrasi, bukan tangkapan layar aplikasi produksi._
+**Menempatkan validasi pada alur yang tepat.** Benturan jadwal perlu ditangani sebelum pekerjaan dikonfirmasi, bukan setelah tim menerima pekerjaan yang waktunya bertabrakan.
+
+## Hasil
+
+Catatan proyek mendokumentasikan alur dari pemilihan service team, pemeriksaan jadwal, hingga pembuatan dan perubahan status work order. Cakupan ini menunjukkan penggunaan Python/Odoo untuk menerjemahkan proses operasional menjadi alur aplikasi.
+
+Materi yang tersedia berupa dokumentasi fitur dan ilustrasi. Source publik, demo, serta pengukuran dampak belum disertakan.

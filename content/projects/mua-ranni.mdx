@@ -1,6 +1,7 @@
 ---
 title: MUA Ranni
 slug: mua-ranni
+category: Website layanan
 kind: makeup-site
 year: 2026
 role: Full-Stack Developer
@@ -16,24 +17,44 @@ features:
   - Supabase untuk autentikasi dan penyimpanan, serta PostgreSQL melalui Drizzle ORM.
 featured: true
 order: 2
+link: https://mua-rannilstry.web.id
 ---
+
+## Ringkasan
+
+MUA Ranni adalah website layanan makeup dengan portofolio, informasi layanan dan harga, kalender ketersediaan, serta formulir pemesanan melalui WhatsApp. Panel admin menyediakan pengelolaan konten di balik halaman publik.
 
 ## Kebutuhan
 
-Calon pelanggan membutuhkan satu tempat untuk melihat hasil riasan, memahami layanan dan harga, memeriksa jadwal, lalu mengirim detail acara. Pemilik layanan juga perlu memperbarui konten tanpa mengubah kode.
+Calon pelanggan perlu melihat hasil riasan, membandingkan layanan, memeriksa jadwal, lalu menyampaikan detail acara. Pemilik layanan membutuhkan cara memperbarui profil, harga, foto, dan jadwal tanpa mengubah kode.
+
+## Peran dan kontribusi
+
+Peran yang tercantum adalah **Full-Stack Developer**, dengan cakupan halaman publik dan pengelolaan konten.
+
+- Membangun galeri portofolio, halaman layanan, dan kalender ketersediaan dengan React dan Next.js.
+- Menyusun formulir booking yang meneruskan detail acara ke WhatsApp.
+- Mengembangkan panel admin untuk profil, layanan, harga, portofolio, jadwal, dan testimoni.
+- Menghubungkan autentikasi dan penyimpanan Supabase dengan data PostgreSQL melalui Drizzle ORM.
 
 ## Implementasi
 
-Website dibangun dengan Next.js, React, TypeScript, dan Tailwind CSS. Halaman publik menampilkan galeri portofolio, informasi layanan, jadwal ketersediaan, dan testimoni. Formulir booking menyusun informasi acara untuk diteruskan melalui WhatsApp.
+Antarmuka menggunakan TypeScript dan Tailwind CSS. Galeri mendukung filter kategori serta tampilan foto. Formulir booking mengumpulkan jenis layanan, tanggal, lokasi, dan informasi acara untuk menyusun pesan WhatsApp; formulir ini bukan sistem konfirmasi booking otomatis.
 
-Panel admin menyediakan pengelolaan profil, kategori portofolio, foto, layanan, harga, dan jadwal. Autentikasi serta penyimpanan menggunakan Supabase, sedangkan data aplikasi diakses melalui Drizzle ORM dan PostgreSQL.
+Di panel admin, Supabase memverifikasi identitas pengguna. Akses dibatasi pada email admin yang diizinkan, dan halaman serta Server Action memeriksa akses sebelum membaca atau mengubah data.
 
-## Cakupan
+Kalender ketersediaan memisahkan informasi yang ditampilkan ke publik dari catatan internal admin. Konten layanan, harga, dan portofolio tersimpan di database.
 
-- Halaman layanan, portofolio, jadwal, kontak, dan FAQ.
-- Galeri dengan kategori dan tampilan foto interaktif.
-- Formulir pemesanan dan integrasi WhatsApp.
-- Autentikasi admin serta pengelolaan konten.
-- Jadwal ketersediaan dan pengelolaan testimoni.
+## Tantangan teknis
 
-_Visual antarmuka merupakan ilustrasi, bukan tangkapan layar aplikasi produksi._
+**Membawa konteks ke proses booking.** Pilihan layanan dan detail acara perlu tetap terbawa ketika pengunjung berpindah dari halaman layanan ke formulir, lalu melanjutkan percakapan melalui WhatsApp.
+
+**Memvalidasi informasi acara.** Formulir memeriksa tanggal yang sudah lewat dan format tautan Google Maps sebelum menyusun pesan pemesanan.
+
+**Memisahkan akses publik dan admin.** Informasi profil dan jadwal harus dapat dibaca pengunjung, sementara perubahan konten dan catatan internal hanya tersedia bagi admin yang terverifikasi.
+
+## Hasil
+
+Website menyediakan alur dari eksplorasi portofolio dan layanan menuju pemesanan lewat WhatsApp. Pengelolaan konten tersedia melalui panel admin, termasuk harga, foto, dan ketersediaan jadwal.
+
+Demo publik tersedia melalui tautan di atas. Pengunjung dapat menelusuri layanan dan membawa detail acara ke percakapan WhatsApp, sementara pembaruan konten ditangani dari panel admin.

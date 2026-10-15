@@ -1,6 +1,7 @@
 ---
 title: IT Inventory
 slug: it-inventory
+category: Aplikasi operasional
 kind: inventory-app
 year: 2026
 role: Full-Stack Developer
@@ -27,22 +28,43 @@ featured: true
 order: 1
 ---
 
+## Ringkasan
+
+IT Inventory adalah aplikasi web untuk pencatatan stok dan transaksi gudang dalam konteks perusahaan kawasan berikat. Proyek ini mempertemukan antarmuka operasional, logika transaksi, database, dan hak akses pengguna.
+
 ## Kebutuhan
 
-Operasional gudang membutuhkan pencatatan stok dan transaksi yang terstruktur, dengan akses yang sesuai peran pengguna. IT Inventory dikembangkan untuk kebutuhan ini dalam konteks perusahaan kawasan berikat.
+Pergerakan barang perlu dicatat berdasarkan produk, lokasi, gudang, dan lot atau nomor seri. Pengguna juga perlu melihat saldo stok tanpa mendapat akses ke gudang yang bukan kewenangannya.
+
+Cakupannya meliputi penerimaan, pengiriman, perpindahan, retur, penyesuaian, stock opname, dan tutup periode.
+
+## Peran dan kontribusi
+
+Peran yang tercantum untuk proyek ini adalah **Full-Stack Developer**. Cakupan pengembangannya mencakup antarmuka React/Next.js, formulir transaksi, query database, serta validasi dan pemeriksaan akses di server.
+
+- Menyusun halaman master data dan transaksi dengan TypeScript, Tailwind CSS, dan shadcn/ui.
+- Menghubungkan data aplikasi ke PostgreSQL melalui Drizzle ORM.
+- Menerapkan autentikasi serta pembatasan akses sesuai peran dan gudang.
+- Menyiapkan database lokal dengan Docker Compose.
 
 ## Implementasi
 
-Antarmuka dibangun dengan React, Next.js, TypeScript, Tailwind CSS, dan shadcn/ui. Logika server mengelola master data, transaksi inventory, validasi input, dan pemeriksaan hak akses.
+Next.js App Router menghubungkan halaman, formulir, dan logika server. Better Auth menangani autentikasi. Pengecekan izin dilakukan di server, sehingga menu yang disembunyikan bukan satu-satunya pembatas akses.
 
-PostgreSQL menyimpan data melalui Drizzle ORM. Better Auth menangani autentikasi, sedangkan Docker Compose menyediakan database untuk pengembangan lokal. Repo juga memuat pengujian unit, database, dan alur browser dengan Vitest serta Playwright.
+Saldo stok saat ini dibaca dari data saldo, sedangkan saldo pada tanggal tertentu dihitung dari ledger. Query juga mempertimbangkan gudang yang dapat diakses pengguna. Data produk, lokasi, lot, dan satuan dihubungkan untuk menyajikan stok dalam konteks yang jelas.
 
-## Cakupan
+Repo memuat pengujian unit dan database dengan Vitest, serta alur browser dengan Playwright. Docker Compose menyediakan PostgreSQL untuk pengembangan lokal.
 
-- Produk, kategori, satuan, partner, gudang, dan lokasi.
-- Stok, lot, nomor seri, dan kartu stok.
-- Penerimaan, pengiriman, perpindahan barang, dan retur.
-- Stock opname, penyesuaian, dan tutup periode.
-- Pengaturan pengguna dan akses berdasarkan peran.
+## Tantangan teknis
 
-_Visual antarmuka merupakan ilustrasi, bukan tangkapan layar aplikasi produksi._
+**Menjaga konsistensi stok.** Transaksi perlu memperhitungkan jenis pergerakan, lokasi, dan status dokumen. Validasi transaksi dan pencatatan pergerakan diletakkan di lapisan server dan database.
+
+**Membatasi akses secara konsisten.** Tampilan daftar dan query stok perlu mengikuti akses gudang pengguna, termasuk saat pencarian, filter, dan pagination digunakan.
+
+**Membaca saldo lintas waktu.** Saldo saat ini dan saldo pada tanggal tertentu menggunakan sumber perhitungan yang berbeda, tetapi tetap perlu menyajikan struktur data yang sama bagi antarmuka.
+
+## Hasil
+
+Cakupan aplikasi yang tersedia di source meliputi master data, transaksi inventory, stok, lot dan nomor seri, stock opname, serta pengaturan akses. Halaman dan alur tersebut terhubung dengan database PostgreSQL.
+
+Proyek ini memperlihatkan penerapan full-stack pada aplikasi operasional: keputusan di antarmuka perlu selaras dengan aturan transaksi dan struktur data. Data stok dapat ditelusuri menurut gudang dan tanggal dengan akses mengikuti pengguna.
