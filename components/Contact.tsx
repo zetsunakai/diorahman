@@ -1,4 +1,5 @@
 import { contactChannels, primaryContact } from "@/lib/site";
+import { SocialIcon } from "@/components/SocialIcon";
 
 export function Contact() {
   return (
@@ -14,30 +15,36 @@ export function Contact() {
       <div className="contact-actions">
         {primaryContact && (
           <a
-            className="primary"
+            className="primary social-link"
             href={primaryContact.href}
-            target={primaryContact.label === "Email" ? undefined : "_blank"}
-            rel={primaryContact.label === "Email" ? undefined : "noreferrer"}
+            target={primaryContact.id === "email" ? undefined : "_blank"}
+            rel={
+              primaryContact.id === "email" ? undefined : "noopener noreferrer"
+            }
           >
-            {primaryContact.label === "Email"
+            <SocialIcon channel={primaryContact.id} />
+            {primaryContact.id === "email"
               ? "Kirim Email"
               : `Terhubung di ${primaryContact.label}`}{" "}
             <span aria-hidden="true">↗</span>
           </a>
         )}
-        {contactChannels
-          .filter((channel) => channel !== primaryContact)
-          .map((channel) => (
-            <a
-              className="text-link"
-              key={channel.label}
-              href={channel.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {channel.label} <span aria-hidden="true">↗</span>
-            </a>
-          ))}
+        <div className="contact-socials">
+          {contactChannels
+            .filter((channel) => channel !== primaryContact)
+            .map((channel) => (
+              <a
+                className="text-link social-link"
+                key={channel.id}
+                href={channel.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SocialIcon channel={channel.id} />
+                {channel.label} <span aria-hidden="true">↗</span>
+              </a>
+            ))}
+        </div>
       </div>
     </section>
   );

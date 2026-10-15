@@ -23,6 +23,7 @@ body {
   color: var(--text);
   font-family: var(--font-body), sans-serif;
   font-size: 16px;
+  font-weight: 400;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
@@ -34,7 +35,11 @@ figure {
   margin: 0;
 }
 h1,
-h2,
+h2 {
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 400;
+  text-wrap: balance;
+}
 h3 {
   font-family: var(--font-display), sans-serif;
   font-weight: 500;
@@ -94,13 +99,74 @@ a {
   gap: 20px;
 }
 .logo {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  padding-inline: 0.55em 1em;
   font-family: var(--font-display), sans-serif;
   font-size: 27px;
   font-weight: 700;
   letter-spacing: -1px;
 }
-.logo span {
+.logo-word {
+  position: relative;
+  display: inline-block;
+}
+.logo-letter {
+  display: inline-block;
+}
+.logo-letter:nth-child(2) {
+  animation-delay: 45ms;
+}
+.logo-letter:nth-child(3) {
+  animation-delay: 90ms;
+}
+.logo:is(:hover, :focus-visible) .logo-letter {
+  animation-name: logo-letter-wave;
+  animation-duration: 350ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes logo-letter-wave {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+}
+.logo-dot {
+  position: absolute;
+  left: 100%;
+  top: 0;
   color: var(--accent);
+  transition: opacity 120ms ease;
+}
+.logo-code {
+  position: absolute;
+  top: 0;
+  color: var(--accent);
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 180ms ease,
+    transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.logo-open {
+  left: 0;
+  transform: translateX(-4px);
+}
+.logo-close {
+  left: calc(100% - 1em);
+  transform: translateX(4px);
+}
+.logo:is(:hover, :focus-visible) .logo-dot {
+  opacity: 0;
+}
+.logo:is(:hover, :focus-visible) .logo-code {
+  opacity: 1;
+  transform: translateX(0);
 }
 .navlinks {
   display: flex;
@@ -153,9 +219,9 @@ a {
   line-height: 1.3;
 }
 .hero h1 {
-  font-size: clamp(38px, 4.3vw, 58px);
-  line-height: 1.1;
-  letter-spacing: -2.3px;
+  font-size: clamp(52px, 6vw, 78px);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
   margin: 20px 0 24px;
 }
 .hero h1 span {
@@ -260,25 +326,15 @@ a {
   padding: 88px 0;
 }
 .section-top {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 36px;
   margin-bottom: 32px;
 }
 h2 {
-  font-size: clamp(28px, 3vw, 38px);
-  line-height: 1.2;
-  letter-spacing: -1.2px;
+  font-size: clamp(38px, 3.8vw, 50px);
+  line-height: 1.15;
+  letter-spacing: 0.015em;
 }
-.section-top h2,
 .about h2 {
   margin-top: 14px;
-}
-.section-top > p {
-  max-width: 32ch;
-  color: var(--muted);
-  font-size: 14px;
 }
 .projects {
   display: grid;
@@ -314,15 +370,17 @@ h2 {
   margin-bottom: 10px;
 }
 .project h3 {
-  font-size: 25px;
-  letter-spacing: -0.6px;
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 400;
+  font-size: 34px;
+  letter-spacing: 0.01em;
   line-height: 1.2;
 }
 .project h3 a:hover {
   color: var(--accent);
 }
 .project-featured h3 {
-  font-size: 34px;
+  font-size: 42px;
 }
 .project-summary {
   margin-top: 14px;
@@ -708,9 +766,11 @@ h2 {
   max-width: 270px;
 }
 .experience-content h3 {
-  font-size: 26px;
-  line-height: 1.3;
-  letter-spacing: -0.5px;
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
 }
 .experience-summary {
   color: var(--muted);
@@ -753,7 +813,7 @@ h2 {
     padding: 28px 0;
   }
   .experience-content h3 {
-    font-size: 24px;
+    font-size: 30px;
   }
   .experience-contributions {
     grid-template-columns: minmax(0, 1fr);
@@ -884,9 +944,106 @@ h2 {
 .contact-actions {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 12px;
   flex-shrink: 0;
+}
+.contact-socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 20px;
+}
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.primary.social-link {
+  gap: 12px;
+}
+.social-icon {
+  display: block;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  overflow: visible;
+}
+.social-symbol,
+.social-detail,
+.social-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.social-link:is(:hover, :focus-visible, :active) .social-symbol {
+  animation: social-greet 650ms ease both;
+}
+.social-link:is(:hover, :focus-visible, :active)
+  .social-icon--instagram
+  .social-detail {
+  animation: social-shutter 650ms ease both;
+}
+.social-link:is(:hover, :focus-visible, :active)
+  .social-icon--linkedin
+  .social-detail {
+  animation: social-lift 650ms ease both;
+}
+.social-link:is(:hover, :focus-visible, :active)
+  .social-icon--github
+  .social-detail {
+  transform-origin: right center;
+  animation: social-wave 650ms ease both;
+}
+.social-link:is(:hover, :focus-visible, :active) .social-dot {
+  animation: social-shutter 650ms ease both;
+}
+@keyframes social-greet {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  30% {
+    transform: rotate(-8deg);
+  }
+  65% {
+    transform: rotate(5deg);
+  }
+}
+@keyframes social-shutter {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(0.6);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+}
+@keyframes social-lift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-2px);
+  }
+  70% {
+    transform: translateY(1px);
+  }
+}
+@keyframes social-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  30% {
+    transform: rotate(18deg);
+  }
+  65% {
+    transform: rotate(-12deg);
+  }
 }
 footer {
   border-top: 1px solid var(--line);
@@ -911,6 +1068,7 @@ footer {
 }
 .footer-links a {
   padding-block: 10px;
+  min-height: 44px;
 }
 .footer-links a:hover {
   color: var(--accent);
@@ -953,7 +1111,7 @@ dialog > .eyebrow {
   margin-right: 36px;
 }
 dialog h2 {
-  font-size: 30px;
+  font-size: 38px;
   margin: 18px 0;
 }
 dialog p:not(.eyebrow),
@@ -984,9 +1142,9 @@ dialog li + li {
   max-width: 860px;
 }
 .project-header h1 {
-  font-size: clamp(38px, 5vw, 64px);
+  font-size: clamp(52px, 6vw, 84px);
   line-height: 1.08;
-  letter-spacing: -2px;
+  letter-spacing: 0.01em;
   margin: 20px 0;
   overflow-wrap: anywhere;
 }
@@ -1092,7 +1250,7 @@ dialog li + li {
 }
 .prose h2 {
   margin: 48px 0 18px;
-  font-size: 29px;
+  font-size: 34px;
   color: var(--text);
 }
 .prose h2:first-child {
@@ -1128,9 +1286,9 @@ dialog li + li {
 }
 .next-project > span:last-child {
   font:
-    500 clamp(24px, 3vw, 36px)/1.3 var(--font-display),
+    400 clamp(32px, 3.6vw, 44px)/1.15 var(--font-heading),
     sans-serif;
-  letter-spacing: -1px;
+  letter-spacing: 0.01em;
 }
 .next-project:hover > span:last-child {
   color: var(--accent);
@@ -1144,15 +1302,14 @@ dialog li + li {
     padding: 64px 0;
   }
   .hero h1 {
-    font-size: 42px;
-    letter-spacing: -1.7px;
+    font-size: clamp(50px, 6vw, 64px);
   }
   .project-featured {
     gap: 24px;
     padding: 22px;
   }
   .project-featured h3 {
-    font-size: 29px;
+    font-size: 38px;
   }
   .project-summary {
     font-size: 14px;
@@ -1201,8 +1358,7 @@ dialog li + li {
     padding: 46px 0;
   }
   .hero h1 {
-    font-size: clamp(36px, 6.7vw, 46px);
-    letter-spacing: -1.5px;
+    font-size: clamp(48px, 11.8vw, 64px);
     margin: 18px 0 22px;
   }
   .hero .hero-role {
@@ -1232,14 +1388,6 @@ dialog li + li {
   .section {
     padding: 56px 0;
   }
-  .section-top {
-    flex-direction: column;
-    align-items: start;
-    gap: 18px;
-  }
-  .section-top > p {
-    max-width: 48ch;
-  }
   .projects {
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
@@ -1256,7 +1404,7 @@ dialog li + li {
   }
   .project h3,
   .project-featured h3 {
-    font-size: 27px;
+    font-size: 34px;
   }
   .project-highlights {
     display: block;
@@ -1314,7 +1462,11 @@ dialog li + li {
     margin-bottom: 40px;
   }
   .contact-actions {
-    align-items: start;
+    width: 100%;
+    align-items: stretch;
+  }
+  .contact-socials {
+    justify-content: start;
   }
   .footer-inner {
     gap: 14px 20px;
@@ -1331,7 +1483,7 @@ dialog li + li {
     padding: 32px 24px 28px;
   }
   dialog h2 {
-    font-size: 27px;
+    font-size: 34px;
   }
   dialog p:not(.eyebrow),
   dialog li {
@@ -1344,8 +1496,8 @@ dialog li + li {
     padding: 28px 0;
   }
   .project-header h1 {
-    font-size: 40px;
-    letter-spacing: -1.5px;
+    font-size: clamp(48px, 10vw, 60px);
+    letter-spacing: 0.01em;
   }
   .project-lead {
     font-size: 16px;
@@ -1398,7 +1550,7 @@ dialog li + li {
     font-size: 15px;
   }
   .prose h2 {
-    font-size: 26px;
+    font-size: 32px;
     margin-top: 36px;
   }
   .next-project {

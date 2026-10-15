@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Space_Grotesk } from "next/font/google";
+import { Bebas_Neue, Source_Sans_3, Space_Grotesk } from "next/font/google";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ScrollEffects } from "@/components/ScrollEffects";
@@ -12,7 +12,14 @@ const display = Space_Grotesk({
   display: "swap",
 });
 
-const text = DM_Sans({
+const heading = Bebas_Neue({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const text = Source_Sans_3({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -45,7 +52,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${display.variable} ${text.variable}`}
+      className={`${heading.variable} ${display.variable} ${text.variable}`}
       data-scroll-behavior="smooth"
     >
       <body>

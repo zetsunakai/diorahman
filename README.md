@@ -1,6 +1,6 @@
 # Dio Rahman Alfateh — Full-Stack Developer Portfolio
 
-Portofolio berbahasa Indonesia dengan Next.js App Router, TypeScript, konten MDX, tema gelap dan aksen lime, serta font DM Sans dan Space Grotesk. Menampilkan IT Inventory, MUA Ranni, dan pengembangan Odoo.
+Portofolio berbahasa Indonesia dengan Next.js App Router, TypeScript, konten MDX, tema gelap dan aksen lime. Bebas Neue Regular dipakai untuk judul besar, Source Sans 3 Regular untuk teks isi, dan Space Grotesk tetap untuk logo serta elemen pendukung. Menampilkan IT Inventory, MUA Ranni, dan pengembangan Odoo.
 
 ## Menjalankan
 
@@ -17,7 +17,7 @@ npm start
 
 | Konten                                               | Lokasi                               |
 | ---------------------------------------------------- | ------------------------------------ |
-| Nama, peran, intro, URL, email, GitHub, LinkedIn, CV | `lib/site.ts`                        |
+| Nama, peran, intro, URL, email, GitHub, LinkedIn, Instagram, CV | `lib/site.ts`                        |
 | Metadata, fitur, dan studi kasus proyek              | `content/projects/*.mdx`             |
 | Profil dan keahlian beserta contoh penerapannya      | `components/About.tsx`               |
 | Hero dan arsitektur 3D                               | `components/Hero/Hero.tsx`           |
@@ -25,13 +25,17 @@ npm start
 | Ilustrasi antarmuka                                  | `components/Works/ProjectArt.tsx`    |
 | Token warna, layout, dan responsivitas               | `app/globals.css`                    |
 
+Font dimuat lewat `next/font/google` di `app/layout.tsx`. Variabel `--font-heading` memakai Bebas Neue 400 (bobot yang tersedia di Google Fonts), `--font-body` memakai Source Sans 3 dengan bobot dasar 400, dan `--font-display` mempertahankan Space Grotesk untuk logo, label peran, judul kecil, serta strip teknologi. Label teknis tetap memakai monospace sistem.
+
 Bagian pengalaman memakai `lib/experience.ts` dan `components/Experience.tsx`. Dasar penulisan dan batasan pembacaan riwayat Git dicatat di [docs/experience-evidence.md](docs/experience-evidence.md). Periode kontribusi kode tidak mewakili tanggal masa kerja.
 
 Kartu menyediakan ringkasan dalam dialog serta tautan **Baca Studi Kasus** ke `/karya/[slug]`. Setiap studi kasus memuat ringkasan, kebutuhan, peran dan kontribusi, implementasi, tantangan teknis, dan hasil.
 
 ### Kontak dan CV
 
-Kontak berasal dari `lib/site.ts`. GitHub aktif; `email` dan `linkedin` kosong karena belum ada kontak pribadi terverifikasi dalam repo. Kanal kosong disembunyikan. Tidak ada formulir demo atau penyimpanan kontak pengunjung.
+Kontak berasal dari `lib/site.ts`. GitHub, LinkedIn, dan Instagram memakai URL profil yang diberikan pemilik portfolio. Parameter tracking pada tautan LinkedIn dihapus. Email masih kosong dan kanal kosong tetap disembunyikan. Tidak ada formulir demo atau penyimpanan kontak pengunjung.
+
+Ikon sosial pada bagian Kontak dibuat sebagai SVG lokal di `components/SocialIcon.tsx`, dengan gerakan singkat saat hover, fokus keyboard, atau ditekan. [Flaticon Animated Icons](https://www.flaticon.com/animated-icons) digunakan sebagai referensi gerak, bukan sumber file aset. Animasi memakai CSS tanpa dependency atau player tambahan, tidak berulang terus-menerus, dan dinonaktifkan saat prefers-reduced-motion aktif. Label teks tetap tampil di samping ikon. Footer hanya memuat logo, copyright, dan tautan Ke atas.
 
 `public/cv.pdf` telah diperiksa: isinya masih placeholder. Karena itu `site.cv` bernilai `null` dan tombol **Download CV** tidak ditampilkan. Ganti PDF dengan CV asli, periksa isi dan data publiknya, lalu isi `cv: "/cv.pdf"` untuk mengaktifkan tombol.
 
@@ -74,6 +78,8 @@ Gerakan pointer memberi kemiringan kecil, sedangkan perubahan lapisan memicu sat
 Hero 3D menambahkan sedikit rotasi dan pergeseran berdasarkan posisi scroll. Interaksi pointer tetap tersedia dan renderer tetap berhenti saat idle atau di luar layar. Navigasi memakai scroll native dengan penanda menu yang mengikuti posisi section.
 
 Halaman studi kasus memakai reveal singkat pada judul, visual, dan blok konten; daftar isi tetap sticky. Effect dibersihkan ketika route berganti. Konten terlihat secara default tanpa JavaScript, fokus keyboard langsung menampilkan blok terkait, dan perubahan prefers-reduced-motion mengembalikan seluruh konten ke tampilan statis.
+
+Logo di header dan footer memakai komponen `components/Logo.tsx`. Saat hover atau fokus keyboard, `dio.` berubah menjadi `<dio/>`: titik memudar, simbol kode masuk dari samping selama 250ms, dan huruf d-i-o bergerak naik bergantian sebelum kembali ke posisi awal. Gerakan huruf berjalan sekali per interaksi. Ruang simbol disediakan sejak awal agar ukuran logo dan posisi navigasi tetap stabil. Saat reduced motion aktif, pergantian tampilan berlangsung langsung tanpa transisi atau gerakan huruf.
 
 ## Verifikasi
 

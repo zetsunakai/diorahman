@@ -8,14 +8,7 @@ export function Experience() {
       aria-labelledby="experience-title"
     >
       <div className="section-top">
-        <div>
-          <p className="eyebrow mono">02 / PENGALAMAN</p>
-          <h2 id="experience-title">Membangun di balik operasional bisnis.</h2>
-        </div>
-        <p>
-          Kontribusi pada aplikasi bisnis HashMicro: menghubungkan proses
-          produksi, data inventory, dan kebutuhan kepabeanan.
-        </p>
+        <h2 id="experience-title">Membangun di balik operasional bisnis.</h2>
       </div>
       <div className="experience-list">
         <span className="experience-track" aria-hidden="true">

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Logo } from "@/components/Logo";
 
 const links = [
   { id: "projects", label: "Proyek" },
@@ -84,9 +85,7 @@ export function Nav() {
   return (
     <header className="site-header">
       <nav className="wrap" aria-label="Navigasi utama">
-        <Link className="logo" href="/#home" aria-label="Dio beranda">
-          dio<span>.</span>
-        </Link>
+        <Logo />
         <div className="navlinks" ref={container}>
           {links.map(({ id, label }) => {
             const current =
