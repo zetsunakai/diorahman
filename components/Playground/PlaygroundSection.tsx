@@ -19,10 +19,6 @@ export function PlaygroundSection({
           <p className="mono eyebrow">Eksperimen interaksi</p>
           <Heading id="playground-title">Playground</Heading>
         </div>
-        <p>
-          Gerakkan kursor untuk mengubah sudut pandang. Tulisan DIO tetap di
-          tengah saat Anda melihatnya dari arah yang berbeda.
-        </p>
       </div>
       <CursorPlayground />
     </section>
