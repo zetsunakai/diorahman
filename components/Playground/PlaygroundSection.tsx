@@ -1,4 +1,5 @@
 import { CursorPlayground } from "@/components/Playground/CursorPlayground";
+import { DinoPlayground } from "@/components/Playground/DinoPlayground";
 import "./playground.css";
 
 export function PlaygroundSection({
@@ -21,6 +22,7 @@ export function PlaygroundSection({
         </div>
       </div>
       <CursorPlayground />
+      <DinoPlayground />
     </section>
   );
 }

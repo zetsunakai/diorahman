@@ -7,9 +7,11 @@ export function Hero() {
         <div className="eyebrow mono">{site.name}</div>
         <p className="hero-role">{site.role}</p>
         <h1 id="hero-title">
-          Saya membangun
+          Dari Kebutuhan Bisnis,
           <br />
-          <span>aplikasi web.</span>
+          Saya Wujudkan
+          <br />
+          <span>Jadi aplikasi web.</span>
         </h1>
         <div className="actions">
           <a className="primary" href="#projects">

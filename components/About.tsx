@@ -22,9 +22,9 @@ const skills = [
   },
   {
     title: "Business Applications",
-    tools: "Odoo · HMX · Manufacturing/Production · Workflow",
+    tools: "Odoo · Django · Manufacturing/Production · Workflow",
     description:
-      "Saya mengembangkan modul Manufacturing/Production di Odoo dan HMX, termasuk perencanaan produksi, reservasi material, dan approval.",
+      "Saya mengembangkan modul Manufacturing/Production di Odoo dan Django, termasuk perencanaan produksi, reservasi material, dan approval.",
     project: "Manufacturing Approval",
     slug: "manufacturing-approval",
   },
@@ -62,18 +62,18 @@ export function About() {
       <div>
         <div className="about-copy">
           <p>
-            Saya <strong>{site.name}</strong>. Pekerjaan saya mencakup website
+            Halo! Saya <strong>Dio</strong>. Pekerjaan saya mencakup website
             layanan, aplikasi inventory, dan pengembangan ERP.
           </p>
           <p>
-            MUA Ranni dan IT Inventory adalah dua proyek web yang saya
-            kerjakan. MUA Ranni menampilkan layanan makeup dan menerima detail
-            booking lewat WhatsApp. IT Inventory menangani pencatatan stok dan
-            transaksi gudang.
+            MUA Ranni dan IT Inventory adalah contoh dua proyek web yang saya
+            kerjakan. Di proyek MUA Ranni saya membuat web untuk layanan makeup
+            dan menerima detail booking lewat WhatsApp. Di proyek IT Inventory saya
+            menangani pencatatan stok dan transaksi gudang untuk dokumen BEACUKAI.
           </p>
           <p>
             Di HashMicro, saya bekerja sebagai ERP Developer dengan fokus pada
-            modul Manufacturing/Production di Odoo dan HMX. Saya mengerjakan
+            modul Manufacturing/Production di Odoo dan Django. Saya mengerjakan
             perencanaan produksi, reservasi material, dan alur persetujuan,
             serta laporan inventory dan integrasi CEISA.
           </p>
