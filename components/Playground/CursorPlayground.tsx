@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 
 export function CursorPlayground() {
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -18,9 +18,9 @@ export function CursorPlayground() {
         if (loading || !entries.some((entry) => entry.isIntersecting)) return;
         loading = true;
         observer.disconnect();
-        import("./createDioScene")
-          .then(({ createDioScene }) => {
-            if (!disposed) cleanup = createDioScene(scene, host);
+        import("./createModelScene")
+          .then(({ createModelScene }) => {
+            if (!disposed) cleanup = createModelScene(scene, host);
           })
           .catch(() => {
             if (!disposed) scene.dataset.renderer = "unavailable";
@@ -43,20 +43,36 @@ export function CursorPlayground() {
         ref={sceneRef}
         tabIndex={0}
         role="region"
-        aria-label="Tulisan DIO tiga dimensi dengan kamera interaktif"
+        aria-label="Model Emilia tiga dimensi dengan kamera interaktif"
         aria-describedby="playground-help"
       >
+        <div className="playground-garden" aria-hidden="true">
+          <div className="playground-moon" />
+          <div className="playground-trees" />
+          <div className="playground-mist" />
+        </div>
+        <div className="playground-fireflies" aria-hidden="true">
+          {Array.from({ length: 12 }, (_, index) => (
+            <span
+              key={index}
+              style={{
+                "--x": `${8 + ((index * 29) % 84)}%`,
+                "--y": `${38 + ((index * 17) % 48)}%`,
+                "--delay": `${index * -1.7}s`,
+                "--duration": `${7 + (index % 4) * 2}s`,
+              } as CSSProperties}
+            />
+          ))}
+        </div>
         <div className="playground-scene-label mono" aria-hidden="true">
           <span>
             <span className="playground-live-label">3D · Camera parallax</span>
-            <span className="playground-preview-label">Pratinjau statis</span>
+            <span className="playground-preview-label">Model Emilia</span>
           </span>
         </div>
         <div className="playground-fallback" aria-hidden="true">
-          <div className="playground-grid" />
-          <span>
-            DIO<span className="playground-period">.</span>
-          </span>
+          <span className="playground-loading">Memuat model Emilia…</span>
+          <span className="playground-unavailable">Model 3D tidak tersedia.</span>
         </div>
         <div className="playground-canvas" ref={canvasRef} aria-hidden="true" />
       </div>

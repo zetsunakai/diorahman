@@ -30,9 +30,11 @@
   height: clamp(440px, calc(100svh - 320px), 760px);
   overflow: hidden;
   isolation: isolate;
-  border: 1px solid #465438;
+  border: 1px solid #514c6b;
   border-radius: 20px;
-  background: #171d14;
+  background:
+    radial-gradient(ellipse at 52% 64%, #8275ad38, transparent 48%),
+    linear-gradient(180deg, #111322 0%, #292a46 45%, #514460 72%, #202a35 100%);
   touch-action: pan-y;
 }
 .playground-scene-label,
@@ -52,7 +54,7 @@
   top: 24px;
 }
 .playground-scene-label span:first-child {
-  color: var(--accent);
+  color: #d4c9ee;
 }
 .playground-scene-footer {
   bottom: 24px;
@@ -89,22 +91,72 @@
   justify-content: center;
   align-items: center;
   font-family: var(--font-heading), sans-serif;
-  font-size: clamp(170px, 27vw, 360px);
+  font-size: clamp(20px, 3vw, 32px);
   line-height: 1;
   letter-spacing: -0.025em;
-  color: var(--accent);
+  color: #d4c9ee;
 }
-.playground-period {
-  color: var(--text);
+.playground-unavailable,
+.playground-scene[data-renderer="unavailable"] .playground-loading {
+  display: none;
 }
-.playground-grid {
+.playground-scene[data-renderer="unavailable"] .playground-unavailable {
+  display: inline;
+}
+.playground-garden,
+.playground-fireflies {
   position: absolute;
-  inset: -140px;
-  background-image:
-    linear-gradient(#c5f4770c 1px, transparent 1px),
-    linear-gradient(90deg, #c5f4770c 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse at center, #000 25%, transparent 72%);
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.playground-garden {
+  transform: translate(var(--garden-x, 0px), var(--garden-y, 0px)) scale(1.06);
+}
+.playground-moon {
+  position: absolute;
+  width: clamp(34px, 5vw, 60px);
+  aspect-ratio: 1;
+  top: 15%;
+  left: 74%;
+  border-radius: 50%;
+  background: #ece9ff;
+  opacity: .8;
+  box-shadow: 0 0 38px 12px #c2b5ee26, 0 0 120px 50px #bca3e51a;
+}
+.playground-trees {
+  position: absolute;
+  inset: 0;
+  background: url("/images/twilight-garden.svg") center bottom / 100% 100% no-repeat;
+}
+.playground-mist {
+  position: absolute;
+  inset: 30% -10% -10%;
+  background:
+    radial-gradient(ellipse at 25% 60%, #b8a9d52b, transparent 43%),
+    radial-gradient(ellipse at 78% 70%, #9daed126, transparent 40%),
+    radial-gradient(ellipse at 50% 100%, #11182799, transparent 65%);
+  filter: blur(14px);
+}
+.playground-fireflies {
+  z-index: 1;
+}
+.playground-fireflies span {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #e4edb1;
+  box-shadow: 0 0 8px 3px #dceaa53d;
+  opacity: .4;
+  animation: playground-firefly var(--duration) var(--delay) ease-in-out infinite alternate;
+}
+@keyframes playground-firefly {
+  0%, 100% { opacity: .15; transform: translate3d(0, 0, 0); }
+  45% { opacity: .75; }
+  70% { opacity: .3; transform: translate3d(12px, -22px, 0); }
 }
 .playground-help {
   max-width: 80ch;
@@ -148,6 +200,9 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .playground-fireflies span {
+    animation: none;
+  }
   .playground-motion-help {
     display: none;
   }

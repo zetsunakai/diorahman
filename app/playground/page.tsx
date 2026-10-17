@@ -4,7 +4,7 @@ import { PlaygroundSection } from "@/components/Playground/PlaygroundSection";
 export const metadata: Metadata = {
   title: "Playground",
   description:
-    "Eksperimen parallax interaktif Dio Rahman Alfateh. Gerakkan kursor untuk mengubah sudut pandang dengan tulisan DIO tetap di tengah.",
+    "Eksperimen model Emilia 3D dengan kamera parallax interaktif di playground Dio Rahman Alfateh.",
   alternates: { canonical: "/playground" },
 };
 

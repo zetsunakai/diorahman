@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="none" fill="none">
+  <defs>
+    <linearGradient id="hills" x2="0" y2="1"><stop stop-color="#454467"/><stop offset="1" stop-color="#22273e"/></linearGradient>
+    <linearGradient id="near" x2="0" y2="1"><stop stop-color="#171f31"/><stop offset="1" stop-color="#101a25"/></linearGradient>
+    <g id="tree">
+      <path d="M-8 0 0-350 8 0Z"/>
+      <path d="m0-305-55 75 43-10-67 80 62-17-82 93 83-22-96 104H112L16-106l83 22-82-93 62 17-67-80 43 10Z"/>
+    </g>
+    <g id="sprig" stroke="currentColor" stroke-width="2">
+      <path d="M0 0Q-8-55 10-110M0-25Q-27-43-30-67M1-46Q27-62 31-86M3-69Q-14-81-16-99"/>
+      <g fill="currentColor" stroke="none"><ellipse cx="-25" cy="-58" rx="5" ry="13" transform="rotate(-35 -25 -58)"/><ellipse cx="26" cy="-75" rx="5" ry="13" transform="rotate(35 26 -75)"/><ellipse cx="-12" cy="-90" rx="4" ry="11" transform="rotate(-30 -12 -90)"/></g>
+    </g>
+  </defs>
+  <!-- Distant ridges and trees leave an open glade around the character. -->
+  <path d="M0 545Q170 430 360 520T740 540T1150 500T1600 470V900H0Z" fill="url(#hills)" opacity=".48"/>
+  <g fill="#36384f" opacity=".5">
+    <use href="#tree" transform="translate(70 650) scale(1.4 1.9)"/><use href="#tree" transform="translate(270 630) scale(.75 1.35)"/><use href="#tree" transform="translate(390 650) scale(.55 1.1)"/>
+    <use href="#tree" transform="translate(1220 650) scale(.65 1.25)"/><use href="#tree" transform="translate(1390 650) scale(.85 1.65)"/><use href="#tree" transform="translate(1540 650) scale(1.2 2)"/>
+  </g>
+  <path d="M0 690Q240 600 440 688T900 714T1350 660T1600 690V900H0Z" fill="#252d40" opacity=".7"/>
+  <g fill="#182334" opacity=".85">
+    <use href="#tree" transform="translate(10 810) scale(1.6 2.65)"/><use href="#tree" transform="translate(175 820) scale(.95 1.8)"/>
+    <use href="#tree" transform="translate(1450 800) scale(.95 1.9)"/><use href="#tree" transform="translate(1620 840) scale(1.7 2.8)"/>
+  </g>
+  <path d="M0 790Q220 722 480 810Q800 855 1100 803T1600 775V900H0Z" fill="url(#near)"/>
+  <g color="#303c49" opacity=".8">
+    <use href="#sprig" transform="translate(100 900) scale(1.5) rotate(-12)"/><use href="#sprig" transform="translate(230 920) scale(1.1) rotate(20)"/>
+    <use href="#sprig" transform="translate(1350 920) scale(1.4) rotate(-20)"/><use href="#sprig" transform="translate(1510 910) scale(1.7) rotate(15)"/>
+  </g>
+  <g fill="#9382b4" opacity=".5"><circle cx="116" cy="739" r="4"/><circle cx="250" cy="812" r="3"/><circle cx="1320" cy="820" r="4"/><circle cx="1483" cy="722" r="3"/></g>
+</svg>

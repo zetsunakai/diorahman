@@ -1,10 +1,8 @@
 import * as THREE from "three";
-import { FontLoader } from "three/addons/loaders/FontLoader.js";
-import { TextGeometry } from "three/addons/geometries/TextGeometry.js";
-import fontData from "./fonts/dio-display.typeface.json";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
-/** A fixed text mesh at the origin, viewed by a camera orbiting that origin. */
-export function createDioScene(
+/** A centered GLB model viewed by a camera orbiting its bounds. */
+export function createModelScene(
   container: HTMLDivElement,
   host: HTMLDivElement,
 ) {
@@ -28,7 +26,7 @@ export function createDioScene(
     powerPreference: "low-power",
   });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
-  renderer.setClearColor(0x171d14, 0);
+  renderer.setClearColor(0x111322, 0);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1;
   renderer.domElement.setAttribute("aria-hidden", "true");
@@ -36,53 +34,66 @@ export function createDioScene(
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-  const font = new FontLoader().parse(fontData);
-  const geometry = new TextGeometry("DIO.", {
-    font,
-    size: 2.8,
-    depth: 0.7,
-    curveSegments: 32,
-    steps: 1,
-    bevelEnabled: true,
-    bevelThickness: 0.06,
-    bevelSize: 0.045,
-    bevelSegments: 3,
+  let subjectRadius = 3;
+  let model: THREE.Group | undefined;
+  const disposeModel = (root: THREE.Object3D) => {
+    const geometries = new Set<THREE.BufferGeometry>();
+    const materials = new Set<THREE.Material>();
+    const textures = new Set<THREE.Texture>();
+    root.traverse((object) => {
+      if (!(object instanceof THREE.Mesh)) return;
+      geometries.add(object.geometry);
+      const meshMaterials = Array.isArray(object.material)
+        ? object.material
+        : [object.material];
+      meshMaterials.forEach((material) => {
+        materials.add(material);
+        Object.values(material).forEach((value) => {
+          if (value instanceof THREE.Texture) textures.add(value);
+        });
+      });
+    });
+    geometries.forEach((geometry) => geometry.dispose());
+    materials.forEach((material) => material.dispose());
+    textures.forEach((texture) => {
+      const source = texture.source.data;
+      if (typeof ImageBitmap !== "undefined" && source instanceof ImageBitmap)
+        source.close();
+      texture.dispose();
+    });
+  };
+  // A soft contact shadow anchors the existing grass base in the glade.
+  const shadowCanvas = document.createElement("canvas");
+  shadowCanvas.width = shadowCanvas.height = 128;
+  const shadowContext = shadowCanvas.getContext("2d")!;
+  const gradient = shadowContext.createRadialGradient(64, 64, 8, 64, 64, 64);
+  gradient.addColorStop(0, "rgba(7, 10, 22, 0.65)");
+  gradient.addColorStop(0.5, "rgba(7, 10, 22, 0.3)");
+  gradient.addColorStop(1, "rgba(7, 10, 22, 0)");
+  shadowContext.fillStyle = gradient;
+  shadowContext.fillRect(0, 0, 128, 128);
+  const shadowTexture = new THREE.CanvasTexture(shadowCanvas);
+  const shadowGeometry = new THREE.PlaneGeometry(4.5, 4.5);
+  const shadowMaterial = new THREE.MeshBasicMaterial({
+    map: shadowTexture,
+    transparent: true,
+    depthWrite: false,
   });
-  geometry.center();
-  geometry.computeBoundingSphere();
-  const subjectRadius = geometry.boundingSphere!.radius;
-  const materials = [
-    new THREE.MeshStandardMaterial({
-      color: "#c5f477",
-      roughness: 0.38,
-      metalness: 0.18,
-    }),
-    new THREE.MeshStandardMaterial({
-      color: "#456b28",
-      roughness: 0.45,
-      metalness: 0.25,
-    }),
-  ];
-  scene.add(new THREE.Mesh(geometry, materials));
-  const grid = new THREE.GridHelper(30, 60, "#6b8d49", "#4e6537");
-  grid.rotation.x = Math.PI / 2;
-  grid.position.z = -1.4;
-  const gridMaterial = grid.material as THREE.LineBasicMaterial;
-  gridMaterial.transparent = true;
-  gridMaterial.opacity = 0.16;
-  gridMaterial.depthWrite = false;
-  scene.add(grid);
-  scene.add(new THREE.HemisphereLight("#f6ffde", "#17200f", 1.5));
-  const key = new THREE.DirectionalLight("#ffffff", 3);
+  const shadow = new THREE.Mesh(shadowGeometry, shadowMaterial);
+  shadow.rotation.x = -Math.PI / 2;
+  shadow.visible = false;
+  scene.add(shadow);
+  scene.add(new THREE.HemisphereLight("#dbe5ff", "#383449", 1.8));
+  const key = new THREE.DirectionalLight("#f5f0ff", 2.6);
   key.position.set(3, 5, 6);
   scene.add(key);
-  const fill = new THREE.DirectionalLight("#d5f5ac", 1.8);
+  const fill = new THREE.DirectionalLight("#c4b5ed", 1.3);
   fill.position.set(-4, 1, 2);
   scene.add(fill);
-  const lowerFill = new THREE.DirectionalLight("#b5cf96", 0.9);
+  const lowerFill = new THREE.DirectionalLight("#bcc9de", 0.6);
   lowerFill.position.set(-2, -4, 3);
   scene.add(lowerFill);
-  const rim = new THREE.DirectionalLight("#c5f477", 2);
+  const rim = new THREE.DirectionalLight("#b8cfff", 2.4);
   rim.position.set(1, 3, -4);
   scene.add(rim);
 
@@ -116,8 +127,10 @@ export function createDioScene(
       Math.cos(yaw) * Math.cos(pitch) * radius,
     );
     camera.lookAt(0, 0, 0);
+    container.style.setProperty("--garden-x", `${-current.x * 10}px`);
+    container.style.setProperty("--garden-y", `${current.y * 6}px`);
     renderer.render(scene, camera);
-    container.dataset.renderer = "webgl";
+    if (model) container.dataset.renderer = "webgl";
     if (!current.equals(target)) requestRender();
   };
   const requestRender = () => {
@@ -218,6 +231,36 @@ export function createDioScene(
   renderer.domElement.addEventListener("webglcontextlost", lost);
   renderer.domElement.addEventListener("webglcontextrestored", restored);
   resize();
+  container.dataset.renderer = "loading";
+  new GLTFLoader().load(
+    "/models/emilia.glb",
+    (gltf) => {
+      if (disposed) {
+        disposeModel(gltf.scene);
+        return;
+      }
+      model = gltf.scene;
+      model.rotation.y -= Math.PI / 2;
+      const bounds = new THREE.Box3().setFromObject(model);
+      const size = bounds.getSize(new THREE.Vector3());
+      const scale = 6 / Math.max(size.x, size.y, size.z);
+      const center = bounds.getCenter(new THREE.Vector3());
+      const subject = new THREE.Group();
+      subject.add(model);
+      subject.scale.setScalar(scale);
+      subject.position.copy(center).multiplyScalar(-scale);
+      const subjectBounds = new THREE.Box3().setFromObject(subject);
+      subjectRadius = subjectBounds.getBoundingSphere(new THREE.Sphere()).radius;
+      shadow.position.y = subjectBounds.min.y - 0.02;
+      shadow.visible = true;
+      scene.add(subject);
+      resize();
+    },
+    undefined,
+    () => {
+      if (!disposed) container.dataset.renderer = "unavailable";
+    },
+  );
 
   return () => {
     disposed = true;
@@ -236,10 +279,12 @@ export function createDioScene(
     reduced.removeEventListener("change", motionChange);
     renderer.domElement.removeEventListener("webglcontextlost", lost);
     renderer.domElement.removeEventListener("webglcontextrestored", restored);
-    geometry.dispose();
-    materials.forEach((material) => material.dispose());
-    grid.geometry.dispose();
-    gridMaterial.dispose();
+    if (model) disposeModel(model);
+    shadowGeometry.dispose();
+    shadowMaterial.dispose();
+    shadowTexture.dispose();
+    container.style.removeProperty("--garden-x");
+    container.style.removeProperty("--garden-y");
     renderer.dispose();
     renderer.forceContextLoss();
     renderer.domElement.remove();
