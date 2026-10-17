@@ -10,7 +10,7 @@ Ditinjau pada 15 Oktober 2026 dari checkout lokal `Equip3-moduleboard` dan `hmx-
 - Riwayat Equip3 lokal tidak shallow. Riwayat HMX lokal **shallow**, sehingga hasil HMX hanya mencakup commit yang tersedia, bukan seluruh riwayat kerja.
 - Periode pada UI adalah tahun kontribusi kode yang ditemukan: Equip3 2025–2026 dan HMX 2026. Itu bukan tanggal mulai/akhir kerja atau bukti masih bekerja pada suatu jabatan.
 - HashMicro adalah konteks organisasi dari repo dan identitas author. Tidak menetapkan jabatan formal, senioritas, kontribusi tunggal, pelanggan, angka dampak, atau status deployment.
-- Tidak menyalin source perusahaan, nama pelanggan, URL internal, atau email author ke konten publik. Identitas yang dipakai untuk pencarian tidak dijadikan kanal kontak portfolio.
+- Tidak menyalin file source perusahaan, nama pelanggan, URL internal, atau email author ke teks portfolio. Identitas yang dipakai untuk pencarian tidak dijadikan kanal kontak portfolio. Cuplikan editor yang diberikan pengguna sebagai aset dicatat terpisah di bawah.
 
 ## Equip3 / Odoo
 
@@ -56,4 +56,14 @@ Isi studi kasus tersebut diganti menjadi **Penyesuaian Integrasi CEISA**. Cakupa
 
 Konten menjelaskan kontribusi penyesuaian pemetaan dan pembentukan payload lintas dokumen; tidak mengklaim membangun seluruh integrasi, keberhasilan pengiriman ke CEISA, atau hasil produksi.
 
-Sesuai arahan pengguna, file studi kasus diganti menjadi `integrasi-ceisa.mdx`, slug menjadi `integrasi-ceisa`, dan key ilustrasi menjadi `ceisa`. File `booking-work-order.mdx` dihapus; URL lamanya dialihkan ke halaman CEISA agar tautan yang sudah dibagikan tetap dapat dibuka. Judul, teks studi kasus, daftar teknologi, tautan keahlian, dan isi teks ilustrasinya mengikuti kasus CEISA. Tidak ada source perusahaan atau identitas pelanggan yang disalin ke portfolio.
+Sesuai arahan pengguna, file studi kasus diganti menjadi `integrasi-ceisa.mdx`, slug menjadi `integrasi-ceisa`, dan key ilustrasi menjadi `ceisa`. File `booking-work-order.mdx` dihapus; URL lamanya dialihkan ke halaman CEISA agar tautan yang sudah dibagikan tetap dapat dibuka. Judul, teks studi kasus, daftar teknologi, tautan keahlian, dan isi teks ilustrasinya mengikuti kasus CEISA. File source perusahaan dan identitas pelanggan tidak disalin ke teks studi kasus.
+
+## Aset gambar dari pengguna
+
+Pada 16 Oktober 2026, pengguna memberikan tiga tangkapan layar untuk mengganti ilustrasi proyek:
+
+- IT Inventory: halaman Stok aplikasi.
+- MUA Ranni: halaman utama website.
+- Integrasi CEISA: editor kode Python pada modul Odoo; caption menyebutnya sebagai cuplikan pengembangan, bukan tampilan aplikasi CEISA.
+
+Aset disimpan di `public/images/projects` dalam WebP lossless dengan dimensi asli. Gambar tidak dipotong atau direka ulang. Tangkapan layar editor tidak menambah klaim kepemilikan seluruh integrasi atau keberhasilan deployment. Proyek lain tetap memakai ilustrasi dengan caption yang sesuai.

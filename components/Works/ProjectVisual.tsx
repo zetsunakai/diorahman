@@ -6,7 +6,10 @@ import type { ProjectMeta } from "@/lib/projects";
 import { ProjectArt } from "./ProjectArt";
 
 type Props = {
-  project: Pick<ProjectMeta, "title" | "kind" | "screenshot" | "screenshotAlt">;
+  project: Pick<
+    ProjectMeta,
+    "title" | "kind" | "screenshot" | "screenshotAlt" | "screenshotCaption"
+  >;
   priority?: boolean;
 };
 
@@ -30,7 +33,11 @@ export function ProjectVisual({ project, priority = false }: Props) {
               src={project.screenshot!}
               alt={project.screenshotAlt!}
               fill
-              sizes="(max-width: 720px) calc(100vw - 40px), (max-width: 1000px) 85vw, 720px"
+              sizes={
+                priority
+                  ? "(max-width: 720px) calc(100vw - 40px), (max-width: 1000px) calc(100vw - 56px), 900px"
+                  : "(max-width: 720px) calc(100vw - 78px), (max-width: 1000px) 50vw, 600px"
+              }
               preload={priority}
               onError={() => setFailedSource(project.screenshot!)}
             />
@@ -41,7 +48,7 @@ export function ProjectVisual({ project, priority = false }: Props) {
       </div>
       <figcaption>
         {hasScreenshot
-          ? `Tangkapan layar ${project.title}.`
+          ? project.screenshotCaption || `Tangkapan layar ${project.title}.`
           : "Ilustrasi antarmuka · bukan screenshot aplikasi."}
       </figcaption>
     </figure>

@@ -10,6 +10,22 @@ export function ScrollEffects() {
     let disposed = false;
     let cleanup: (() => void) | undefined;
     const mountedAt = performance.now();
+    const initialHash = location.hash;
+    let interacted = false;
+    let anchorFrame = 0;
+    const interact = () => {
+      interacted = true;
+    };
+    const inputEvents = [
+      "pointerdown",
+      "wheel",
+      "keydown",
+      "touchstart",
+    ] as const;
+    if (initialHash)
+      inputEvents.forEach((event) =>
+        window.addEventListener(event, interact, { once: true, passive: true }),
+      );
 
     Promise.all([import("gsap"), import("gsap/ScrollTrigger")])
       .then(([{ gsap }, { ScrollTrigger }]) => {
@@ -111,18 +127,6 @@ export function ScrollEffects() {
               if (hero)
                 gsap.to(hero, {
                   y: -24,
-                  ease: "none",
-                  scrollTrigger: {
-                    trigger: heroSection,
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: 0.7,
-                  },
-                });
-              const architecture = heroSection.querySelector(".architecture");
-              if (architecture)
-                gsap.to(architecture, {
-                  y: 24,
                   ease: "none",
                   scrollTrigger: {
                     trigger: heroSection,
@@ -293,7 +297,17 @@ export function ScrollEffects() {
         );
 
         document.fonts.ready.then(() => {
-          if (!disposed) ScrollTrigger.refresh();
+          if (disposed) return;
+          ScrollTrigger.refresh();
+          // Refresh restores its saved scroll position; honor the initial anchor afterwards.
+          if (initialHash)
+            anchorFrame = requestAnimationFrame(() => {
+              if (disposed || interacted || location.hash !== initialHash)
+                return;
+              const target = document.getElementById(initialHash.slice(1));
+              if (target && main.contains(target))
+                target.scrollIntoView({ behavior: "instant", block: "start" });
+            });
         });
       })
       .catch(() => {
@@ -302,6 +316,10 @@ export function ScrollEffects() {
 
     return () => {
       disposed = true;
+      cancelAnimationFrame(anchorFrame);
+      inputEvents.forEach((event) =>
+        window.removeEventListener(event, interact),
+      );
       cleanup?.();
     };
   }, [pathname]);

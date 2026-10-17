@@ -21,6 +21,7 @@ export type ProjectMeta = {
   repo?: string;
   screenshot?: string;
   screenshotAlt?: string;
+  screenshotCaption?: string;
 };
 
 export type Project = ProjectMeta & { content: string };
@@ -48,6 +49,10 @@ function resolveScreenshot(data: Record<string, unknown>) {
   return {
     screenshot: data.screenshot,
     screenshotAlt: data.screenshotAlt.trim(),
+    screenshotCaption:
+      typeof data.screenshotCaption === "string"
+        ? data.screenshotCaption.trim() || undefined
+        : undefined,
   };
 }
 
@@ -72,6 +77,7 @@ function readAll(): Project[] {
         content,
         screenshot: undefined,
         screenshotAlt: undefined,
+        screenshotCaption: undefined,
         ...resolveScreenshot(data),
         link: externalUrl(data.link),
         repo: externalUrl(data.repo),

@@ -179,9 +179,17 @@ a {
   color: var(--muted);
 }
 .navlinks a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   padding-block: 10px;
 }
+.nav-label {
+  display: inline-block;
+  pointer-events: none;
+}
 .navlinks a:hover,
+.navlinks a:focus-visible,
 .navlinks a.active {
   color: var(--text);
 }
@@ -209,11 +217,10 @@ a {
   color: var(--accent);
 }
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
-  align-items: center;
-  gap: 60px;
   padding: 88px 0 76px;
+}
+.hero-copy {
+  max-width: 960px;
 }
 .hero .hero-role {
   color: var(--text);
@@ -1287,7 +1294,6 @@ dialog li + li {
     width: calc(100% - 56px);
   }
   .hero {
-    gap: 30px;
     padding: 64px 0;
   }
   .hero h1 {
@@ -1342,8 +1348,6 @@ dialog li + li {
     display: none;
   }
   .hero {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 30px;
     padding: 46px 0;
   }
   .hero h1 {
@@ -1551,6 +1555,24 @@ dialog li + li {
     gap: 12px 18px;
   }
 }
+@media (max-width: 600px) {
+  html {
+    scroll-padding-top: 136px;
+  }
+  .site-header nav {
+    height: auto;
+    min-height: 110px;
+    flex-wrap: wrap;
+    gap: 0;
+    padding-block: 8px;
+  }
+  .navlinks {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 13px;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   html {
     /* ScrollTrigger can restore an inline smooth value after refreshing. */
@@ -1561,158 +1583,6 @@ dialog li + li {
   *::after {
     transition: none !important;
     animation: none !important;
-  }
-}
-
-.architecture {
-  min-width: 0;
-  align-self: center;
-  border: 1px solid #405036;
-  border-radius: 14px;
-  background: #151c14;
-  overflow: hidden;
-}
-.architecture-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 18px 20px 0;
-}
-.architecture-header .mono {
-  font-size: 12px;
-  color: var(--accent);
-}
-.architecture-header > span {
-  font-size: 11px;
-  color: var(--muted);
-}
-.architecture-stage {
-  position: relative;
-  height: clamp(300px, 28vw, 400px);
-  isolation: isolate;
-}
-.architecture-static,
-.architecture-canvas {
-  position: absolute;
-  inset: 0;
-}
-.architecture-static {
-  pointer-events: none;
-}
-.architecture-static.is-hidden {
-  visibility: hidden;
-}
-.architecture-fallback {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.architecture-canvas canvas {
-  display: block;
-  touch-action: pan-y;
-}
-.architecture-layers {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 7px;
-  padding: 8px 20px 20px;
-}
-.architecture-link {
-  display: flex;
-  align-items: center;
-  position: relative;
-  min-width: 0;
-  gap: 8px;
-  padding: 13px 9px;
-  border: 1px solid #38472f;
-  border-radius: 7px;
-  background: #1b2519;
-  transition:
-    background 0.18s,
-    border-color 0.18s;
-}
-.architecture-link:hover,
-.architecture-link.is-active {
-  border-color: #93b66c;
-  background: #25331e;
-}
-.architecture-layer-number {
-  align-self: flex-start;
-  color: #a9c58a;
-  font:
-    10px/1.8 ui-monospace,
-    monospace;
-}
-.architecture-link strong {
-  display: block;
-  font-family: var(--font-display), sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.5;
-}
-.architecture-link small {
-  display: block;
-  color: var(--muted);
-  font-size: 10px;
-  line-height: 1.6;
-  white-space: nowrap;
-}
-.architecture-link-arrow {
-  align-self: flex-start;
-  margin-left: auto;
-  color: var(--accent);
-  font-size: 11px;
-}
-@media (max-width: 1000px) {
-  .hero {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
-  }
-  .architecture-header {
-    padding-inline: 14px;
-  }
-  .architecture-header > span {
-    font-size: 9px;
-  }
-  .architecture-stage {
-    height: 290px;
-  }
-  .architecture-layer-number,
-  .architecture-link-arrow {
-    display: none;
-  }
-  .architecture-link {
-    justify-content: center;
-    padding: 11px 6px;
-  }
-  .architecture-link strong {
-    font-size: 12px;
-  }
-  .architecture-link small {
-    font-size: 9px;
-  }
-}
-@media (max-width: 720px) {
-  .hero {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .architecture {
-    width: 100%;
-    max-width: 500px;
-    justify-self: center;
-  }
-  .architecture-stage {
-    height: 260px;
-  }
-  .architecture-header {
-    padding-top: 16px;
-  }
-  .architecture-layers {
-    padding: 8px 16px 16px;
-    gap: 6px;
-  }
-  .architecture-link {
-    min-height: 65px;
   }
 }
 

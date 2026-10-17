@@ -1,5 +1,4 @@
 import { site } from "@/lib/site";
-import { ArchitectureHero } from "./ArchitectureHero";
 
 export function Hero() {
   return (
@@ -26,7 +25,6 @@ export function Hero() {
           </a>
         </div>
       </div>
-      <ArchitectureHero />
     </section>
   );
 }
