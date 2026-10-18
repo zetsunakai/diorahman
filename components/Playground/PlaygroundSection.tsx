@@ -2,6 +2,9 @@ import { CursorPlayground } from "@/components/Playground/CursorPlayground";
 import { DinoPlayground } from "@/components/Playground/DinoPlayground";
 import "./playground.css";
 
+// Set to true to show the 3D playground again.
+const SHOW_3D_PLAYGROUND = false;
+
 export function PlaygroundSection({
   standalone = false,
 }: {
@@ -21,7 +24,7 @@ export function PlaygroundSection({
           <Heading id="playground-title">Playground</Heading>
         </div>
       </div>
-      <CursorPlayground />
+      {SHOW_3D_PLAYGROUND && <CursorPlayground />}
       <DinoPlayground />
     </section>
   );
