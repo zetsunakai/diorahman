@@ -8,7 +8,7 @@ export function Contact() {
         <h2 id="contact-heading">Mari bekerja sama.</h2>
         <p>
           Saya terbuka untuk membahas proyek web, pengembangan ERP, atau
-          peluang kerja. Silakan hubungi saya melalui salah satu profil berikut.
+          peluang bekerja sama. Silakan hubungi melalui salah satu profil berikut.
         </p>
       </div>
       <div className="contact-actions">
